@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import "./styles.scss";
 
 import { getPosts } from "../../features/postsSlice";
 import { Post } from "./Post/Post";
@@ -7,7 +8,7 @@ import { PostForm } from "../Forms/PostForm";
 
 export const Posts = () => {
   const dispatch = useDispatch();
-  const posts = useSelector((state) => state.posts.posts);
+  const posts = useSelector((state) => state.posts.postsData);
 
   useEffect(() => {
     dispatch(getPosts());
@@ -29,9 +30,12 @@ export const Posts = () => {
   ));
 
   return (
-    <>
-      <PostForm />
-      {renderedPosts}
-    </>
+    <div id="posts">
+      <h2>REST with MERN</h2>
+      <div id="content">
+        <PostForm />
+        {renderedPosts}
+      </div>
+    </div>
   );
 };

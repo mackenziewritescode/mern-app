@@ -1,0 +1,15 @@
+#posts {
+  display: flex;
+  flex-direction: column;
+  justify-content: top;
+  align-items: center;
+  min-height: 100vh;
+  min-width: 360px;
+  background: grey;
+
+  #content {
+    background: white;
+    width: 80%;
+    height: 800px;
+  }
+}
