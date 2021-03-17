@@ -7,15 +7,15 @@ const initialState = {
   error: null,
 };
 
-export const getPosts = createAsyncThunk("/posts", async () => {
+export const getPosts = createAsyncThunk("/posts/fetch", async () => {
   const response = await api.fetchPosts();
   return response.data;
 });
 
-// export const createPost = createAsyncThunk("/posts", async (newPost) => {
-//   const response = await api.createPost(newPost);
-//   return response.data;
-// });
+export const createPost = createAsyncThunk("/posts", async (newPost) => {
+  const response = await api.createPost(newPost);
+  return response.data;
+});
 
 const postsSlice = createSlice({
   name: "posts",
@@ -33,9 +33,9 @@ const postsSlice = createSlice({
       state.status = "failed";
       state.error = action.error;
     },
-    // [createPost.fulfilled]: (state, action) => {
-    //   state.postsData.push(action.payload);
-    // },
+    [createPost.fulfilled]: (state, action) => {
+      state.postsData.push(action.payload);
+    },
   },
 });
 

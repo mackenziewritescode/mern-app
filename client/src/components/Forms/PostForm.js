@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { unwrapResult } from "@reduxjs/toolkit";
 
 import "./styles.scss";
-// import { createPost } from "../../features/postsSlice";
+import { createPost } from "../../features/postsSlice";
 
 export const PostForm = () => {
   const [title, setTitle] = useState("");
@@ -19,16 +19,19 @@ export const PostForm = () => {
   const canSave = fieldsCheck.every(Boolean) && reqStatus === "idle";
 
   const handleSubmit = async () => {
-    // if (canSave) {
-    //   try {
-    //     const result = await dispatch(
-    //       createPost({ title, author, content, image })
-    //     );
-    //     unwrapResult(result);
-    //   } catch (error) {
-    //     console.log(error);
-    //   }
-    // }
+    if (canSave) {
+      try {
+        setReqStatus("pending");
+        const result = await dispatch(
+          createPost({ title, author, content, image })
+        );
+        unwrapResult(result);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setReqStatus("idle");
+      }
+    }
   };
 
   return (
