@@ -34,7 +34,7 @@ export const Posts = () => {
       <h2>REST with MERN</h2>
       <div id="content">
         <PostForm />
-        {renderedPosts}
+        <div id="post-wrapper">{renderedPosts}</div>
       </div>
     </div>
   );

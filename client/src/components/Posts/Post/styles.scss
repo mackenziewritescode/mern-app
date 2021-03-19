@@ -1,7 +1,33 @@
+$post-height: 200px;
+
 #post {
   display: flex;
   flex-direction: column;
-  width: 55%;
-  background: rosybrown;
-  margin: 20px;
+  flex-wrap: wrap;
+  width: 90%;
+  background: rgb(245, 190, 190);
+  margin: 20px 0;
+  height: $post-height;
+  justify-content: flex-start;
+
+  .post-image-wrap {
+    display: flex;
+    height: $post-height - 30px;
+    width: $post-height - 30px;
+    margin: 15px;
+    flex-direction: row;
+  }
+
+  .post-content {
+    display: flex;
+    background: lightcyan;
+    flex-direction: column;
+    margin: 15px;
+    min-width: 60%;
+  }
+
+  .post-item {
+    display: flex;
+    margin: 5px;
+  }
 }

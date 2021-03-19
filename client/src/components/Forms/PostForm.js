@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import FileBase from "react-file-base64";
+import FileBase64 from "react-file-base64";
 import { useDispatch } from "react-redux";
 import { unwrapResult } from "@reduxjs/toolkit";
 
@@ -18,9 +18,10 @@ export const PostForm = () => {
   const fieldsCheck = [title, author, content];
   const canSave = fieldsCheck.every(Boolean) && reqStatus === "idle";
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
     if (canSave) {
       try {
+        e.preventDefault();
         setReqStatus("pending");
         const result = await dispatch(
           createPost({ title, author, content, image })
@@ -67,7 +68,10 @@ export const PostForm = () => {
         <br />
         <div className="file-upload">
           <label htmlFor="image">Add an image</label>
-          <FileBase multiple={false} onDone={(image) => setImage(image)} />
+          <FileBase64
+            multiple={false}
+            onDone={(image) => setImage(image.base64)}
+          />
         </div>
         <input type="submit" className="submit-button" value="Submit" />
       </form>

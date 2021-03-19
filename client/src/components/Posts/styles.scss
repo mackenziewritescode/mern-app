@@ -12,4 +12,12 @@
     width: 80%;
     height: 800px;
   }
+
+  #post-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: calc(100% - 360px);
+  background: rgb(241, 255, 223);
+  align-items: center;
+  }
 }
