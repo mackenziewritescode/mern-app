@@ -4,6 +4,8 @@ import React from "react";
 import "./styles.scss";
 
 export const Post = (props) => {
+  const imageCheck = props.image ? "post-content" : "post-content no-image";
+
   return (
     <div id="post">
       {props.image ? (
@@ -11,10 +13,11 @@ export const Post = (props) => {
           <img className="post-image" alt="" src={props.image} />
         </div>
       ) : null}
-      <div className="post-content">
-        <div className="post-item">Title: {props.title}</div>
-        <div className="post-item">Author: {props.author}</div>
-        <div className="post-item">Content: {props.content}</div>
+      <div className={imageCheck}>
+        <h4 className="post-item title">{props.title}</h4>
+        <div className="post-item author">Author: {props.author}</div>
+        <div className="post-item content">{props.content}</div>
+        <div className="replies">Replies: {props.replies.length}</div>
       </div>
     </div>
   );

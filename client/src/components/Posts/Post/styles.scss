@@ -1,33 +1,86 @@
-$post-height: 200px;
-
 #post {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   flex-wrap: wrap;
+  box-sizing: border-box;
   width: 90%;
-  background: rgb(245, 190, 190);
-  margin: 20px 0;
-  height: $post-height;
+  background: rgb(243, 243, 243);
+  margin: 0 0 20px 0;
+  height: 200px;
   justify-content: flex-start;
+  border-radius: 12px;
+  border: solid rgba(0, 0, 0, 0.1) 3px;
 
   .post-image-wrap {
     display: flex;
-    height: $post-height - 30px;
-    width: $post-height - 30px;
+    height: 200px - 30px;
+    width: 200px - 30px;
     margin: 15px;
+    margin-right: 0;
     flex-direction: row;
+    position: relative;
+    // background: rgba(0, 0, 0, 0.2);
+
+    img {
+      display: flex;
+      max-height: 100%;
+      max-width: 100%;
+      position: absolute;
+      bottom: 50%;
+      transform: translateY(50%);
+      border-radius: 6px;
+    }
   }
 
   .post-content {
     display: flex;
-    background: lightcyan;
+    // background: lightcyan;
     flex-direction: column;
     margin: 15px;
-    min-width: 60%;
+    width: calc(100% - 215px);
+    text-overflow: clip;
+
+    .post-item {
+      display: flex;
+      margin: 5px;
+      // background: sandybrown;
+    }
+
+    .title {
+      font-size: 24px;
+    }
+
+    .content {
+      line-height: 22px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+    }
+
+    .replies {
+      display: flex;
+      align-self: flex-end;
+      margin-top: auto;
+    }
   }
 
-  .post-item {
-    display: flex;
-    margin: 5px;
+  @media (max-width: 700px) {
+    .post-image-wrap {
+      width: 100px;
+    }
+    .post-content {
+      width: calc(100% - 150px);
+    }
+  }
+  .no-image {
+    width: 100%;
+  }
+}
+
+@media (max-width: 1200px) {
+  #post {
+    width: 100%;
   }
 }
