@@ -15,7 +15,9 @@ export const Post = (props) => {
       ) : null}
       <div className={imageCheck}>
         <h4 className="post-item title">{props.title}</h4>
-        <div className="post-item author">Author: {props.author}</div>
+        <div className="post-item author">
+          Posted by {props.author} two minutes ago.
+        </div>
         <div className="post-item content">{props.content}</div>
         <div className="replies">Replies: {props.replies.length}</div>
       </div>
