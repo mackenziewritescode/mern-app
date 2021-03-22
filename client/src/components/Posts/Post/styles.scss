@@ -10,6 +10,7 @@
   justify-content: flex-start;
   border-radius: 12px;
   border: solid rgba(0, 0, 0, 0.1) 3px;
+  transition: 200ms;
 
   .post-image-wrap {
     display: flex;
@@ -93,6 +94,13 @@
   .no-image {
     width: 100%;
   }
+}
+
+#post:hover {
+  background: rgb(230, 230, 230);
+}
+#post:active {
+  background: rgb(194, 194, 194);
 }
 
 @media (max-width: 1200px) {
