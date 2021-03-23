@@ -1,7 +1,7 @@
 import React from "react";
-// import Dropdown from 'react-dropdown'
-import { parseISO, formatRelative, formatDistance, format } from "date-fns";
+import { parseISO, formatDistance, format } from "date-fns";
 
+import { PostMenu } from "./PostMenu/PostMenu";
 import "./styles.scss";
 
 const formatDate = (timestamp) => {
@@ -23,8 +23,11 @@ export const Post = (props) => {
           <img className="post-image" alt="" src={props.image} />
         </div>
       ) : null}
-      <div className={imageCheck}>
-        <h4 className="post-item title">{props.title}</h4>
+      <div id="post-content" className={imageCheck}>
+        <div className="post-item title-menu">
+          <h4>{props.title}</h4>
+          <PostMenu />
+        </div>
         <div className="post-item author">
           Posted by {props.author} {time}.
         </div>

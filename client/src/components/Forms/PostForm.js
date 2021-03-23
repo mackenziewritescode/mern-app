@@ -19,9 +19,9 @@ export const PostForm = () => {
   const canSave = fieldsCheck.every(Boolean) && reqStatus === "idle";
 
   const handleSubmit = async (e) => {
+    e.preventDefault();
     if (canSave) {
       try {
-        e.preventDefault();
         setReqStatus("pending");
         const result = await dispatch(
           createPost({ title, author, content, image })
@@ -73,7 +73,7 @@ export const PostForm = () => {
             onDone={(image) => setImage(image.base64)}
           />
         </div>
-        <input type="submit" className="submit-button" value="Submit" />
+        <input type="submit" className="submit-button" value="Post" />
       </form>
     </div>
   );

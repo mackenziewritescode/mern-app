@@ -10,7 +10,8 @@
   justify-content: flex-start;
   border-radius: 12px;
   border: solid rgba(0, 0, 0, 0.1) 3px;
-  transition: 200ms;
+  transition: 300ms;
+  cursor: pointer;
 
   .post-image-wrap {
     display: flex;
@@ -47,14 +48,21 @@
       // background: sandybrown;
     }
 
-    .title {
-      font-size: 24px;
-      white-space: normal;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
+    .title-menu {
+      flex-direction: row;
+      justify-content: space-between;
+
+      h4 {
+        font-size: 24px;
+        margin: 0;
+        font-weight: bold;
+        white-space: normal;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+      }
     }
 
     .author {
@@ -76,6 +84,8 @@
       display: flex;
       align-self: flex-end;
       margin-top: auto;
+      font-size: 14px;
+      color: grey;
     }
   }
 
@@ -99,9 +109,9 @@
 #post:hover {
   background: rgb(230, 230, 230);
 }
-#post:active {
-  background: rgb(194, 194, 194);
-}
+// #post:active {
+//   background: rgb(247, 247, 247);
+// }
 
 @media (max-width: 1200px) {
   #post {
