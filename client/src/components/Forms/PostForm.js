@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import FileBase64 from "react-file-base64";
 import { useDispatch } from "react-redux";
 import { unwrapResult } from "@reduxjs/toolkit";
 
 import "./styles.scss";
 import { createPost } from "../../features/postsSlice";
+import { PostContext } from "../Posts/Posts";
 
 export const PostForm = () => {
   const [title, setTitle] = useState("");
@@ -13,7 +14,12 @@ export const PostForm = () => {
   const [image, setImage] = useState("");
   const [reqStatus, setReqStatus] = useState("idle");
 
+  const { currentPostId, setCurrentPostId } = useContext(PostContext);
+
   const dispatch = useDispatch();
+
+  // const posts = useSelector((state) => state.posts.postsData);
+  // const post = posts.find((post) => post._id === id); // finds the post that matches the id passed to the compnent
 
   const fieldsCheck = [title, author, content];
   const canSave = fieldsCheck.every(Boolean) && reqStatus === "idle";

@@ -26,7 +26,7 @@ export const Post = (props) => {
       <div id="post-content" className={imageCheck}>
         <div className="post-item title-menu">
           <h4>{props.title}</h4>
-          <PostMenu />
+          <PostMenu id={props.id} />
         </div>
         <div className="post-item author">
           Posted by {props.author} {time}.

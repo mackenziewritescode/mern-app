@@ -1,10 +1,18 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Menu, MenuItem, MenuButton } from "@szhsin/react-menu";
+
 import "@szhsin/react-menu/dist/index.css";
 import "./styles.scss";
 import { HiDotsHorizontal } from "react-icons/hi";
+import { PostContext } from "../../Posts";
 
-export const PostMenu = () => {
+export const PostMenu = ({ id }) => {
+  const { setCurrentPostId } = useContext(PostContext);
+
+  const handleEdit = () => {
+    setCurrentPostId(id);
+  };
+
   return (
     <div className="menu">
       <Menu
@@ -14,7 +22,9 @@ export const PostMenu = () => {
           </MenuButton>
         }
       >
-        <MenuItem className="menu-item">Edit post</MenuItem>
+        <MenuItem className="menu-item" value="Edit" onClick={handleEdit}>
+          Edit post
+        </MenuItem>
         <MenuItem className="menu-item">Delete post</MenuItem>
       </Menu>
     </div>

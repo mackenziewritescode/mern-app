@@ -17,6 +17,11 @@ export const createPost = createAsyncThunk("/posts", async (newPost) => {
   return response.data;
 });
 
+export const updatePost = createAsyncThunk("/posts", async (id, post) => {
+  const response = await api.updatePost(id, post);
+  return response.data;
+});
+
 const postsSlice = createSlice({
   name: "posts",
   initialState,
@@ -35,6 +40,17 @@ const postsSlice = createSlice({
     },
     [createPost.fulfilled]: (state, action) => {
       state.postsData.push(action.payload);
+    },
+    [updatePost.fulfilled]: (state, action) => {
+      const { id, title, author, content, image } = action.payload;
+      const existingPost = state.postsData.find((post) => post._id === id);
+
+      if (existingPost) {
+        existingPost.title = title;
+        existingPost.author = author;
+        existingPost.content = content;
+        existingPost.image = image;
+      }
     },
   },
 });
