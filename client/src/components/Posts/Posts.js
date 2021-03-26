@@ -19,6 +19,7 @@ export const Posts = () => {
   const renderedPosts = posts.map((post) => (
     <Post
       key={post._id}
+      id={post._id}
       title={post.title}
       author={post.author}
       content={post.content}
