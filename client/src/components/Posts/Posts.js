@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState, createContext } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "./styles.scss";
 
@@ -6,15 +6,18 @@ import { getPosts } from "../../features/postsSlice";
 import { Post } from "./Post/Post";
 import { PostForm } from "../Forms/PostForm";
 
+export const PostContext = createContext();
+
 export const Posts = () => {
+  const [currentPostId, setCurrentPostId] = useState("");
+  console.log(currentPostId);
+
   const dispatch = useDispatch();
   const posts = useSelector((state) => state.posts.postsData);
 
   useEffect(() => {
     dispatch(getPosts());
   }, [dispatch]);
-
-  console.log(posts);
 
   const renderedPosts = posts.map((post) => (
     <Post
@@ -31,12 +34,14 @@ export const Posts = () => {
   ));
 
   return (
-    <div id="posts">
-      <h2>REST with MERN</h2>
-      <div id="content">
-        <PostForm />
-        <div id="post-wrapper">{renderedPosts}</div>
+    <PostContext.Provider value={{ currentPostId, setCurrentPostId }}>
+      <div id="posts">
+        <h2>REST with MERN</h2>
+        <div id="content">
+          <PostForm />
+          <div id="post-wrapper">{renderedPosts}</div>
+        </div>
       </div>
-    </div>
+    </PostContext.Provider>
   );
 };

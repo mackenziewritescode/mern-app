@@ -13,10 +13,6 @@ const postSchema = mongoose.Schema({
     type: [Object],
     default: [],
   },
-  isEditing: {
-    type: Boolean,
-    default: false,
-  },
 });
 
 const post = mongoose.model("post", postSchema);

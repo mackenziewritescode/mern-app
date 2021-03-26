@@ -42,7 +42,7 @@ const postsSlice = createSlice({
       state.postsData.push(action.payload);
     },
     [updatePost.fulfilled]: (state, action) => {
-      const { id, title, author, content, image, isEditing } = action.payload;
+      const { id, title, author, content, image } = action.payload;
       const existingPost = state.postsData.find((post) => post._id === id);
 
       if (existingPost) {
@@ -50,7 +50,6 @@ const postsSlice = createSlice({
         existingPost.author = author;
         existingPost.content = content;
         existingPost.image = image;
-        existingPost.isEditing = isEditing;
       }
     },
   },

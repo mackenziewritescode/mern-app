@@ -1,27 +1,16 @@
-import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useContext } from "react";
 import { Menu, MenuItem, MenuButton } from "@szhsin/react-menu";
-import { unwrapResult } from "@reduxjs/toolkit";
 
 import "@szhsin/react-menu/dist/index.css";
 import "./styles.scss";
 import { HiDotsHorizontal } from "react-icons/hi";
-import { updatePost } from "../../../../api";
+import { PostContext } from "../../Posts";
 
 export const PostMenu = ({ id }) => {
-  const dispatch = useDispatch();
+  const { setCurrentPostId } = useContext(PostContext);
 
-  const posts = useSelector((state) => state.posts.postsData);
-  const post = posts.find((post) => post._id === id);
-
-  const handleEdit = async () => {
-    try {
-      const result = await dispatch(updatePost({ id: id, isEditing: true }));
-      unwrapResult(result);
-    } catch (error) {
-      console.log(error);
-    }
-    // console.log(post);
+  const handleEdit = () => {
+    setCurrentPostId(id);
   };
 
   return (
