@@ -1,6 +1,6 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import FileBase64 from "react-file-base64";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { unwrapResult } from "@reduxjs/toolkit";
 
 import "./styles.scss";
@@ -18,15 +18,33 @@ export const PostForm = () => {
 
   const dispatch = useDispatch();
 
-  // const posts = useSelector((state) => state.posts.postsData);
-  // const post = posts.find((post) => post._id === id); // finds the post that matches the id passed to the compnent
+  const posts = useSelector((state) => state.posts.postsData);
+  const existingPost = posts.find((post) => post._id === currentPostId);
+
+  // Fill form with post to edit when Edit is clicked
+  useEffect(() => {
+    if (currentPostId) {
+      setTitle(existingPost.title);
+      setAuthor(existingPost.author);
+      setContent(existingPost.content);
+    }
+    // eslint-disable-next-line
+  }, [currentPostId]);
 
   const fieldsCheck = [title, author, content];
   const canSave = fieldsCheck.every(Boolean) && reqStatus === "idle";
+  const clearForm = () => {
+    setTitle("");
+    setAuthor("");
+    setContent("");
+    setImage("");
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (canSave) {
+      // if (!existingPost) {
+      //-------------------- CREATE POST
       try {
         setReqStatus("pending");
         const result = await dispatch(
@@ -37,14 +55,23 @@ export const PostForm = () => {
         console.log(error);
       } finally {
         setReqStatus("idle");
+        setCurrentPostId("");
+        clearForm();
       }
+    } else {
+      //-------------------- EDIT POST
     }
+    // }
   };
 
+  const formWrapperStyle = currentPostId
+    ? "form-wrapper form-edit"
+    : "form-wrapper";
+
   return (
-    <div className="form-wrapper">
+    <div className={formWrapperStyle}>
       <form className="form" autoComplete="off" onSubmit={handleSubmit}>
-        <h2>Create a Post</h2>
+        <h2>{currentPostId ? "Edit" : "Create a"} Post</h2>
         <input
           className="form-input"
           type="text"
@@ -79,7 +106,11 @@ export const PostForm = () => {
             onDone={(image) => setImage(image.base64)}
           />
         </div>
-        <input type="submit" className="submit-button" value="Post" />
+        <input
+          type="submit"
+          className="submit-button"
+          value={currentPostId ? "Update" : "Post"}
+        />
       </form>
     </div>
   );

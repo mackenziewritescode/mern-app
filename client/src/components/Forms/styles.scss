@@ -8,6 +8,7 @@
   border-radius: 12px;
   border: solid rgba(0, 0, 0, 0.1) 3px;
   box-sizing: border-box;
+  transition: 500ms;
 
   h2 {
     text-align: center;
@@ -39,6 +40,10 @@
     width: calc(100% - 20px);
     margin: 10px;
   }
+}
+
+.form-edit {
+  background: rgb(155, 155, 155);
 }
 
 @media (max-width: 1200px) {

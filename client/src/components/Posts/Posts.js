@@ -10,7 +10,6 @@ export const PostContext = createContext();
 
 export const Posts = () => {
   const [currentPostId, setCurrentPostId] = useState("");
-  console.log(currentPostId);
 
   const dispatch = useDispatch();
   const posts = useSelector((state) => state.posts.postsData);
@@ -18,6 +17,8 @@ export const Posts = () => {
   useEffect(() => {
     dispatch(getPosts());
   }, [dispatch]);
+
+  // Watch part 2 for how to update posts on submit
 
   const renderedPosts = posts.map((post) => (
     <Post
