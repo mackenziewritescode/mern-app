@@ -12,15 +12,18 @@ export const getPosts = createAsyncThunk("/posts/fetch", async () => {
   return response.data;
 });
 
-export const createPost = createAsyncThunk("/posts", async (newPost) => {
+export const createPost = createAsyncThunk("/posts/create", async (newPost) => {
   const response = await api.createPost(newPost);
   return response.data;
 });
 
-export const updatePost = createAsyncThunk("/posts", async (id, post) => {
-  const response = await api.updatePost(id, post);
-  return response.data;
-});
+export const updatePost = createAsyncThunk(
+  "/posts/update",
+  async (id, post) => {
+    const response = await api.updatePost(id, post);
+    return response.data;
+  }
+);
 
 const postsSlice = createSlice({
   name: "posts",
@@ -42,14 +45,16 @@ const postsSlice = createSlice({
       state.postsData.push(action.payload);
     },
     [updatePost.fulfilled]: (state, action) => {
-      const { id, title, author, content, image } = action.payload;
+      const { id, post } = action.payload;
       const existingPost = state.postsData.find((post) => post._id === id);
 
       if (existingPost) {
-        existingPost.title = title;
-        existingPost.author = author;
-        existingPost.content = content;
-        existingPost.image = image;
+        existingPost.title = post.title;
+        existingPost.author = post.author;
+        existingPost.content = post.content;
+        existingPost.image = post.image;
+      } else {
+        console.log(action.payload);
       }
     },
   },

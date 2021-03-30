@@ -11,6 +11,7 @@ export const PostMenu = ({ id }) => {
 
   const handleEdit = () => {
     setCurrentPostId(id);
+    // scroll to top
   };
 
   return (

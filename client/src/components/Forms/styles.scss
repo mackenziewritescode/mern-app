@@ -34,11 +34,25 @@
     margin: 10px;
     margin-top: 0;
   }
-  .submit-button {
+  .button {
     font-size: 18px;
     padding: 4px 0;
     width: calc(100% - 20px);
     margin: 10px;
+    background-color: rgb(245, 245, 245);
+    border: solid 2px grey;
+  }
+  .clear-button {
+    margin-top: 0;
+    // color: rgb(124, 124, 124);
+    background-color: rgb(221, 221, 221);
+    border: solid 2px rgb(160, 160, 160);
+  }
+  .button:hover {
+    background-color: rgb(231, 231, 231);
+  }
+  .clear-button:hover {
+    background-color: rgb(207, 207, 207);
   }
 }
 
