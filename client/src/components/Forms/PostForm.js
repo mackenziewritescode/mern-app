@@ -65,6 +65,7 @@ export const PostForm = () => {
         //-------------------- EDIT POST
         try {
           const updatedPost = { title, author, content, image };
+          // console.log(currentPostId, updatedPost);
 
           setReqStatus("pending");
           const result = await dispatch(updatePost(currentPostId, updatedPost));

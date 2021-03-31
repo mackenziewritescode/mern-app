@@ -21,6 +21,7 @@ export const updatePost = createAsyncThunk(
   "/posts/update",
   async (id, post) => {
     const response = await api.updatePost(id, post);
+    console.log(response.data);
     return response.data;
   }
 );
@@ -34,6 +35,7 @@ const postsSlice = createSlice({
       state.status = "loading";
     },
     [getPosts.fulfilled]: (state, action) => {
+      console.log(state.postsData);
       state.status = "succeeded";
       state.postsData = state.postsData.concat(action.payload);
     },
@@ -45,9 +47,9 @@ const postsSlice = createSlice({
       state.postsData.push(action.payload);
     },
     [updatePost.fulfilled]: (state, action) => {
+      // console.log(action.payload);
       const { id, post } = action.payload;
       const existingPost = state.postsData.find((post) => post._id === id);
-
       if (existingPost) {
         existingPost.title = post.title;
         existingPost.author = post.author;
