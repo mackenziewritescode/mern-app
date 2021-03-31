@@ -26,6 +26,10 @@ export const updatePost = createAsyncThunk(
   }
 );
 
+export const deletePost = createAsyncThunk("/posts/delete", async (id) => {
+  await api.deletePost(id);
+});
+
 const postsSlice = createSlice({
   name: "posts",
   initialState,
@@ -58,6 +62,12 @@ const postsSlice = createSlice({
       } else {
         console.log(action.payload);
       }
+    },
+    [deletePost.fulfilled]: (state, action) => {
+      const { id } = action.payload;
+      console.log(id);
+
+      state.postsData = state.postsData.filter((post) => post._id !== id);
     },
   },
 });
