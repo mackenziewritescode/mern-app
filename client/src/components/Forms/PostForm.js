@@ -1,10 +1,9 @@
 import React, { useState, useContext, useEffect } from "react";
 import FileBase64 from "react-file-base64";
 import { useDispatch, useSelector } from "react-redux";
-import { unwrapResult } from "@reduxjs/toolkit";
 
 import "./styles.scss";
-import { createPost, updatePost } from "../../features/postsSlice";
+import { createPost, updatePost } from "../../features/postsActions";
 import { PostContext } from "../Posts/Posts";
 
 export const PostForm = () => {
@@ -18,7 +17,7 @@ export const PostForm = () => {
 
   const dispatch = useDispatch();
 
-  const posts = useSelector((state) => state.posts.postsData);
+  const posts = useSelector((state) => state.posts);
   const existingPost = currentPostId
     ? posts.find((post) => post._id === currentPostId)
     : null;
@@ -50,10 +49,7 @@ export const PostForm = () => {
         //-------------------- CREATE POST
         try {
           setReqStatus("pending");
-          const result = await dispatch(
-            createPost({ title, author, content, image })
-          );
-          unwrapResult(result);
+          await dispatch(createPost({ title, author, content, image }));
         } catch (error) {
           console.log(error);
         } finally {
@@ -68,8 +64,7 @@ export const PostForm = () => {
           // console.log(currentPostId, updatedPost);
 
           setReqStatus("pending");
-          const result = await dispatch(updatePost(currentPostId, updatedPost));
-          unwrapResult(result);
+          await dispatch(updatePost(currentPostId, updatedPost));
         } catch (error) {
           console.log(error);
         } finally {

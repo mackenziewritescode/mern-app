@@ -2,7 +2,7 @@ import React, { useEffect, useState, createContext } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "./styles.scss";
 
-import { getPosts } from "../../features/postsSlice";
+import { getPosts } from "../../features/postsActions";
 import { Post } from "./Post/Post";
 import { PostForm } from "../Forms/PostForm";
 
@@ -12,7 +12,7 @@ export const Posts = () => {
   const [currentPostId, setCurrentPostId] = useState("");
 
   const dispatch = useDispatch();
-  const posts = useSelector((state) => state.posts.postsData);
+  const posts = useSelector((state) => state.posts);
 
   useEffect(() => {
     dispatch(getPosts());
