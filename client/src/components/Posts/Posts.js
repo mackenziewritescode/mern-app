@@ -20,19 +20,21 @@ export const Posts = () => {
 
   // Watch part 2 for how to update posts on submit
 
-  const renderedPosts = posts.map((post) => (
-    <Post
-      key={post._id}
-      id={post._id}
-      title={post.title}
-      author={post.author}
-      content={post.content}
-      image={post.image}
-      date={post.date}
-      postNum={post.postNum}
-      replies={post.replies}
-    />
-  ));
+  const renderedPosts = posts
+    .map((post) => (
+      <Post
+        key={post._id}
+        id={post._id}
+        title={post.title}
+        author={post.author}
+        content={post.content}
+        image={post.image}
+        date={post.date}
+        postNum={post.postNum}
+        replies={post.replies}
+      />
+    ))
+    .reverse();
 
   return (
     <PostContext.Provider value={{ currentPostId, setCurrentPostId }}>

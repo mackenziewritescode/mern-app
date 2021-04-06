@@ -16,6 +16,14 @@ export const Post = (props) => {
 
   const time = formatDate(props.date);
 
+  const author = (
+    <span>
+      <span className="invisible">-</span>
+      <span className="author-prop">{props.author}</span>
+      <span className="invisible">-</span>
+    </span>
+  );
+
   return (
     <div id="post">
       {props.image ? (
@@ -29,7 +37,7 @@ export const Post = (props) => {
           <PostMenu id={props.id} />
         </div>
         <div className="post-item author">
-          Posted by {props.author} {time}.
+          Posted by {author} {time}.
         </div>
         <div className="post-item content">{props.content}</div>
         <div className="replies">Replies: {props.replies.length}</div>

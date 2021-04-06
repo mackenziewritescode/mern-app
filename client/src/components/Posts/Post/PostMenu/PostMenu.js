@@ -15,11 +15,11 @@ export const PostMenu = ({ id }) => {
 
   const handleEdit = () => {
     setCurrentPostId(id);
-    // scroll to top
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const handleDelete = async () => {
-    await dispatch(deletePost(id));
+    // await dispatch(deletePost(id));
   };
 
   return (
