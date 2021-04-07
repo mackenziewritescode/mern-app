@@ -13,6 +13,7 @@
   h2 {
     text-align: center;
     font-size: 24px;
+    margin-top: 4px;
   }
 
   label {
@@ -40,13 +41,14 @@
     width: calc(100% - 20px);
     margin: 10px;
     background-color: rgb(245, 245, 245);
-    border: solid 2px grey;
+    border: solid 1px grey;
+    border-radius: 6px;
   }
   .clear-button {
     margin-top: 0;
     // color: rgb(124, 124, 124);
     background-color: rgb(221, 221, 221);
-    border: solid 2px rgb(160, 160, 160);
+    border: solid 1px rgb(160, 160, 160);
   }
   .button:hover {
     background-color: rgb(231, 231, 231);

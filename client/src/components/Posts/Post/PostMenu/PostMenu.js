@@ -7,6 +7,7 @@ import "./styles.scss";
 import { HiDotsHorizontal } from "react-icons/hi";
 import { PostContext } from "../../Posts";
 import { deletePost } from "../../../../features/postsActions";
+import { confirm } from "../../../Confirm/Confirm";
 
 export const PostMenu = ({ id }) => {
   const { setCurrentPostId } = useContext(PostContext);
@@ -19,7 +20,9 @@ export const PostMenu = ({ id }) => {
   };
 
   const handleDelete = async () => {
-    // await dispatch(deletePost(id));
+    if (await confirm("Are your sure?")) {
+      await dispatch(deletePost(id));
+    }
   };
 
   return (
