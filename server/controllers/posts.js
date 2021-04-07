@@ -22,15 +22,47 @@ export const createPost = async (req, res) => {
   }
 };
 
-export const updatePost = async (req, res) => {
-  const { id: _id } = req.params;
+// export const updatePost = async (req, res) => {
+//   const { id } = req.params;
+//   const { title, author, content, image } = req.body;
 
-  if (!mongoose.Types.ObjectId.isValid(_id))
+//   if (!mongoose.Types.ObjectId.isValid(id))
+//     return res.status(404).send(`No post with id: ${id}`);
+
+//   const updatedPost = { title, author, content, image, _id: id };
+
+//   await Post.findByIdAndUpdate(id, updatedPost, { new: true });
+
+//   console.log(updatedPost);
+
+//   res.json(updatedPost);
+// };
+export const updatePost = async (req, res) => {
+  const { id } = req.params;
+  const post = req.body;
+
+  if (!mongoose.Types.ObjectId.isValid(id))
     return res.status(404).send("Post not found.");
 
-  const updatedPost = await Post.findByIdAndUpdate(_id, req.body, {
-    new: true,
-  });
+  const updatedPost = await Post.findByIdAndUpdate(
+    id,
+    { ...post, id },
+    {
+      new: true,
+    }
+  );
 
   res.json(updatedPost);
+};
+
+export const deletePost = async (req, res) => {
+  const { id } = req.params;
+  console.log(id);
+
+  if (!mongoose.Types.ObjectId.isValid(id))
+    return res.status(404).send("Post not found.");
+
+  const deletedPost = await Post.findByIdAndRemove(id);
+
+  res.json(deletedPost);
 };

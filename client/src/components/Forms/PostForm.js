@@ -1,10 +1,9 @@
 import React, { useState, useContext, useEffect } from "react";
 import FileBase64 from "react-file-base64";
 import { useDispatch, useSelector } from "react-redux";
-import { unwrapResult } from "@reduxjs/toolkit";
 
 import "./styles.scss";
-import { createPost } from "../../features/postsSlice";
+import { createPost, updatePost } from "../../features/postsActions";
 import { PostContext } from "../Posts/Posts";
 
 export const PostForm = () => {
@@ -18,8 +17,10 @@ export const PostForm = () => {
 
   const dispatch = useDispatch();
 
-  const posts = useSelector((state) => state.posts.postsData);
-  const existingPost = posts.find((post) => post._id === currentPostId);
+  const posts = useSelector((state) => state.posts);
+  const existingPost = currentPostId
+    ? posts.find((post) => post._id === currentPostId)
+    : null;
 
   // Fill form with post to edit when Edit is clicked
   useEffect(() => {
@@ -38,30 +39,41 @@ export const PostForm = () => {
     setAuthor("");
     setContent("");
     setImage("");
+    if (currentPostId) setCurrentPostId("");
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (canSave) {
-      // if (!existingPost) {
-      //-------------------- CREATE POST
-      try {
-        setReqStatus("pending");
-        const result = await dispatch(
-          createPost({ title, author, content, image })
-        );
-        unwrapResult(result);
-      } catch (error) {
-        console.log(error);
-      } finally {
-        setReqStatus("idle");
-        setCurrentPostId("");
-        clearForm();
+      if (!existingPost) {
+        //-------------------- CREATE POST
+        try {
+          setReqStatus("pending");
+          await dispatch(createPost({ title, author, content, image }));
+        } catch (error) {
+          console.log(error);
+        } finally {
+          setReqStatus("idle");
+          setCurrentPostId("");
+          clearForm();
+        }
+      } else {
+        //-------------------- EDIT POST
+        try {
+          const updatedPost = { title, author, content, image };
+          // console.log(currentPostId, updatedPost);
+
+          setReqStatus("pending");
+          await dispatch(updatePost(currentPostId, updatedPost));
+        } catch (error) {
+          console.log(error);
+        } finally {
+          setReqStatus("idle");
+          setCurrentPostId("");
+          clearForm();
+        }
       }
-    } else {
-      //-------------------- EDIT POST
     }
-    // }
   };
 
   const formWrapperStyle = currentPostId
@@ -108,9 +120,12 @@ export const PostForm = () => {
         </div>
         <input
           type="submit"
-          className="submit-button"
+          className="button"
           value={currentPostId ? "Update" : "Post"}
         />
+        <button className="button clear-button" onClick={clearForm}>
+          {currentPostId ? "Cancel" : "Clear"}
+        </button>
       </form>
     </div>
   );
