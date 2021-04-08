@@ -1,3 +1,16 @@
+.menu {
+  z-index: 999;
+  position: relative;
+  float: right;
+  display: none;
+}
+@media (max-width: 700px) {
+  .menu {
+    top: 44px;
+    right: 12px;
+  }
+}
+
 .menu-button {
   width: 50px;
   height: 30px;

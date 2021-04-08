@@ -28,6 +28,7 @@ export const PostMenu = ({ id }) => {
   return (
     <div className="menu">
       <Menu
+        onClick={(e) => e.stopPropagation()}
         menuButton={
           <MenuButton className="menu-button">
             <HiDotsHorizontal />

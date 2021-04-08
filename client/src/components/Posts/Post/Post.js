@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { parseISO, formatDistance, format } from "date-fns";
 
 import { PostMenu } from "./PostMenu/PostMenu";
@@ -25,23 +26,25 @@ export const Post = (props) => {
   );
 
   return (
-    <div id="post">
-      {props.image ? (
-        <div className="post-image-wrap">
-          <img className="post-image" alt="" src={props.image} />
+    <div className="post-wrap">
+      {/* <PostMenu id={props.id} /> */}
+      <Link id="post" to={`/posts/${props.id}`}>
+        {props.image ? (
+          <div className="post-image-wrap">
+            <img className="post-image" alt="" src={props.image} />
+          </div>
+        ) : null}
+        <div id="post-content" className={imageCheck}>
+          <div className="post-item title-menu">
+            <h4>{props.title}</h4>
+          </div>
+          <div className="post-item author">
+            Posted by {author} {time}.
+          </div>
+          <div className="post-item content">{props.content}</div>
+          <div className="replies">Replies: {props.replies.length}</div>
         </div>
-      ) : null}
-      <div id="post-content" className={imageCheck}>
-        <div className="post-item title-menu">
-          <h4>{props.title}</h4>
-          <PostMenu id={props.id} />
-        </div>
-        <div className="post-item author">
-          Posted by {author} {time}.
-        </div>
-        <div className="post-item content">{props.content}</div>
-        <div className="replies">Replies: {props.replies.length}</div>
-      </div>
+      </Link>
     </div>
   );
 };
