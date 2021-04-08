@@ -22,21 +22,6 @@ export const createPost = async (req, res) => {
   }
 };
 
-// export const updatePost = async (req, res) => {
-//   const { id } = req.params;
-//   const { title, author, content, image } = req.body;
-
-//   if (!mongoose.Types.ObjectId.isValid(id))
-//     return res.status(404).send(`No post with id: ${id}`);
-
-//   const updatedPost = { title, author, content, image, _id: id };
-
-//   await Post.findByIdAndUpdate(id, updatedPost, { new: true });
-
-//   console.log(updatedPost);
-
-//   res.json(updatedPost);
-// };
 export const updatePost = async (req, res) => {
   const { id } = req.params;
   const post = req.body;

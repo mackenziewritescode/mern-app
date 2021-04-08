@@ -12,6 +12,7 @@ export const PostForm = () => {
   const [content, setContent] = useState("");
   const [image, setImage] = useState("");
   const [reqStatus, setReqStatus] = useState("idle");
+  const [fileKey, setFileKey] = useState("");
 
   const { currentPostId, setCurrentPostId } = useContext(PostContext);
 
@@ -35,10 +36,13 @@ export const PostForm = () => {
   const fieldsCheck = [title, author, content];
   const canSave = fieldsCheck.every(Boolean) && reqStatus === "idle";
   const clearForm = () => {
+    const randomString = Math.random().toString(36);
+
     setTitle("");
     setAuthor("");
     setContent("");
     setImage("");
+    setFileKey(randomString);
     if (currentPostId) setCurrentPostId("");
   };
 
@@ -60,8 +64,9 @@ export const PostForm = () => {
       } else {
         //-------------------- EDIT POST
         try {
-          const updatedPost = { title, author, content, image };
-          // console.log(currentPostId, updatedPost);
+          const updatedPost = image
+            ? { title, author, content, image }
+            : { title, author, content };
 
           setReqStatus("pending");
           await dispatch(updatePost(currentPostId, updatedPost));
@@ -83,7 +88,7 @@ export const PostForm = () => {
   return (
     <div className={formWrapperStyle}>
       <form className="form" autoComplete="off" onSubmit={handleSubmit}>
-        <h2>{currentPostId ? "Edit" : "Create a"} Post</h2>
+        <h2>{currentPostId ? "Edit" : "Create"} Post</h2>
         <input
           className="form-input"
           type="text"
@@ -114,6 +119,7 @@ export const PostForm = () => {
         <div className="file-upload">
           <label htmlFor="image">Add an image</label>
           <FileBase64
+            key={fileKey}
             multiple={false}
             onDone={(image) => setImage(image.base64)}
           />

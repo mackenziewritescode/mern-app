@@ -21,9 +21,10 @@
     margin-right: 0;
     flex-direction: row;
     position: relative;
+    justify-content: center;
     // background: rgba(0, 0, 0, 0.2);
 
-    img {
+    .post-image {
       display: flex;
       max-height: 100%;
       max-width: 100%;
