@@ -27,7 +27,7 @@ export const Post = (props) => {
 
   return (
     <div className="post-wrap">
-      {/* <PostMenu id={props.id} /> */}
+      <PostMenu id={props.id} />
       <Link id="post" to={`/posts/${props.id}`}>
         {props.image ? (
           <div className="post-image-wrap">
