@@ -35,7 +35,7 @@ export const Post = (props) => {
           </div>
         ) : null}
         <div id="post-content" className={imageCheck}>
-          <div className="post-item title-menu">
+          <div className="post-item post-title">
             <h4>{props.title}</h4>
           </div>
           <div className="post-item author">
