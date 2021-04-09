@@ -12,8 +12,7 @@ const App = () => {
         <Route exact path="/">
           <Posts />
         </Route>
-        {/* <Route path="/posts/:postId"> */}
-        <Route path="/posts">
+        <Route exact path="/posts/:postId">
           <Replies />
         </Route>
       </Switch>
