@@ -19,11 +19,10 @@ export const Replies = ({ match }) => {
   const post = useSelector((state) =>
     state.posts.find((post) => post._id === postId)
   );
-  console.log(post);
 
   const replies = []; // useDispatch
 
-  const fullPost = (
+  const fullPost = post ? (
     <FullPost
       key={post._id}
       id={post._id}
@@ -35,13 +34,13 @@ export const Replies = ({ match }) => {
       postNum={post.postNum}
       replies={post.replies}
     />
-  );
+  ) : null;
 
   const renderedReplies = replies.map((reply) => <Reply />);
 
   return (
     <div id="replies">
-      <h2>Post Title</h2>
+      <h2>Title</h2>
       <div id="content">
         <ReplyForm id={postId} />
         <div id="reply-wrapper">
