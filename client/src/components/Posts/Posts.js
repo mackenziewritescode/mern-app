@@ -18,8 +18,6 @@ export const Posts = () => {
     dispatch(getPosts());
   }, [dispatch]);
 
-  // Watch part 2 for how to update posts on submit
-
   const renderedPosts = posts
     .map((post) => (
       <Post

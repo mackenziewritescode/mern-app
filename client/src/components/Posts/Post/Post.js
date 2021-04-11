@@ -17,13 +17,13 @@ export const Post = (props) => {
 
   const time = formatDate(props.date);
 
-  const author = (
-    <span>
-      <span className="invisible">-</span>
-      <span className="author-prop">{props.author}</span>
-      <span className="invisible">-</span>
-    </span>
-  );
+  // const author = (
+  //   // <span>
+  //   //   <span className="invisible">-</span>
+  //   //   <span className="author-prop">{props.author}</span>
+  //   //   <span className="invisible">-</span>
+  //   // </span>
+  // );
 
   return (
     <div className="post-wrap">
@@ -39,7 +39,7 @@ export const Post = (props) => {
             <h4>{props.title}</h4>
           </div>
           <div className="post-item author">
-            Posted by {author} {time}.
+            Posted by {props.author} {time}.
           </div>
           <div className="post-item content">{props.content}</div>
           <div className="replies">Replies: {props.replies.length}</div>

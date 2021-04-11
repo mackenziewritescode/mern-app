@@ -9,12 +9,8 @@ const App = () => {
   return (
     <Router>
       <Switch>
-        <Route exact path="/">
-          <Posts />
-        </Route>
-        <Route exact path="/posts/:postId">
-          <Replies />
-        </Route>
+        <Route exact path="/" component={Posts} />
+        <Route exact path="/posts/:postId" component={Replies} />
       </Switch>
     </Router>
   );

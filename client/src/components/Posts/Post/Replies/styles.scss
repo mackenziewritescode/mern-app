@@ -1,0 +1,33 @@
+#replies {
+  display: flex;
+  flex-direction: column;
+  justify-content: top;
+  align-items: center;
+  min-height: 100vh;
+  min-width: 360px;
+  background: white;
+
+  #content {
+    width: 80%;
+  }
+
+  #reply-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: calc(100% - 360px);
+    // background: rgb(241, 255, 223);
+    align-items: center;
+    margin-bottom: 30px;
+  }
+
+  @media (max-width: 1200px) {
+    #post-wrapper {
+      width: 100%;
+    }
+  }
+  @media (max-width: 500px) {
+    #content {
+      width: 100%;
+    }
+  }
+}
