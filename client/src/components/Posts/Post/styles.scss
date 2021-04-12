@@ -80,15 +80,6 @@
         font-size: 14px;
         color: grey;
         font-style: italic;
-
-        .invisible {
-          color: rgba(0, 0, 0, 0);
-        }
-
-        .author-prop {
-          font-weight: bold;
-          color: rgb(87, 87, 87);
-        }
       }
 
       .content {
@@ -130,9 +121,6 @@
     background: rgb(230, 230, 230);
     text-decoration: none;
   }
-  // #post:active {
-  //   background: rgb(247, 247, 247);
-  // }
 }
 @media (max-width: 1200px) {
   .post-wrap {

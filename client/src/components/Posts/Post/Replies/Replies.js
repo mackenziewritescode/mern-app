@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, createContext, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import "./styles.scss";
@@ -7,7 +7,11 @@ import { FullPost } from "./FullPost/FullPost";
 import { Reply } from "./Reply/Reply";
 import { ReplyForm } from "../../../Forms/ReplyForm";
 
+export const ReplyContext = createContext();
+
 export const Replies = ({ match }) => {
+  const [currentReplyId, setCurrentReplyId] = useState("");
+
   const { postId } = match.params;
 
   const dispatch = useDispatch();
@@ -39,15 +43,17 @@ export const Replies = ({ match }) => {
   const renderedReplies = replies.map((reply) => <Reply />);
 
   return (
-    <div id="replies">
-      <h2>Title</h2>
-      <div id="content">
-        <ReplyForm id={postId} />
-        <div id="reply-wrapper">
-          {fullPost}
-          {renderedReplies}
+    <ReplyContext.Provider value={{ currentReplyId, setCurrentReplyId }}>
+      <div id="replies">
+        <h2>Title</h2>
+        <div id="content">
+          <ReplyForm id={postId} />
+          <div id="reply-wrapper">
+            {fullPost}
+            {renderedReplies}
+          </div>
         </div>
       </div>
-    </div>
+    </ReplyContext.Provider>
   );
 };

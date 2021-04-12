@@ -1,16 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { parseISO, formatDistance, format } from "date-fns";
 
 import { PostMenu } from "./PostMenu/PostMenu";
 import "./styles.scss";
-
-const formatDate = (timestamp) => {
-  timestamp = parseISO(timestamp);
-  const timeAgo = formatDistance(timestamp, new Date(), { addSuffix: true });
-  const date = format(timestamp, "MM/dd/yyyy");
-  return `${timeAgo} on ${date}`;
-};
+import { formatDate } from "./formatDate";
 
 export const Post = (props) => {
   const imageCheck = props.image ? "post-content" : "post-content no-image";

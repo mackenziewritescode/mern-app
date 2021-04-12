@@ -1,16 +1,12 @@
-import React, {
-  useState,
-  // useContext,
-  useEffect,
-} from "react";
+import React, { useState, useContext, useEffect } from "react";
 import FileBase64 from "react-file-base64";
 import { useDispatch, useSelector } from "react-redux";
 
 import "./styles.scss";
 import { createPost, updatePost } from "../../features/postsActions";
-// import { PostContext } from "../Posts/Posts";
+import { ReplyContext } from "../Posts/Post/Replies/Replies";
 
-export const ReplyForm = () => {
+export const ReplyForm = (props) => {
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
   const [content, setContent] = useState("");
@@ -18,7 +14,9 @@ export const ReplyForm = () => {
   const [reqStatus, setReqStatus] = useState("idle");
   const [fileKey, setFileKey] = useState("");
 
-  // const { currentPostId, setCurrentPostId } = useContext(PostContext);
+  const parentId = props.id;
+
+  const { currentReplyId, setCurrentReplyId } = useContext(ReplyContext);
   const { currentPostId, setCurrentPostId } = "";
 
   const dispatch = useDispatch();

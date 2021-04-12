@@ -7,7 +7,7 @@
   flex-wrap: wrap;
   box-sizing: border-box;
   background: rgb(243, 243, 243);
-  margin: 0 30px 20px 0;
+  margin: 0 30px 0 0;
   justify-content: flex-start;
   border-radius: 12px;
   border: solid rgba(0, 0, 0, 0.1) 3px;
@@ -22,23 +22,49 @@
     width: calc(100% - 60px);
     text-overflow: clip;
 
-    h3 {
-      font-size: 36px;
-      font-weight: bold;
+    .title-and-menu {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+
+      h3 {
+        font-size: 36px;
+        font-weight: bold;
+      }
     }
 
     hr {
+      display: inline-block;
       width: 100%;
       border-top: 3px solid rgba(0, 0, 0, 0.1);
       margin: 5px 0;
     }
-
-    .image {
-      display: block;
-      width: 80%;
-      height: auto;
-      margin: 15px 0;
-      border-radius: 6px;
+    .image-wrap {
+      .image {
+        display: block;
+        max-width: 90%;
+        height: auto;
+        margin: 15px auto;
+        border-radius: 6px;
+      }
     }
+
+    .author {
+      font-size: 16px;
+      color: grey;
+      font-style: italic;
+      margin-bottom: 10px;
+    }
+
+    .content {
+      margin: 10px 0 20px;
+    }
+  }
+}
+@media (max-width: 1200px) {
+  .full-post {
+    width: 100%;
+    margin-top: 20px;
+    margin-right: 0;
   }
 }
