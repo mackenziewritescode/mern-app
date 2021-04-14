@@ -3,7 +3,7 @@ import FileBase64 from "react-file-base64";
 import { useDispatch, useSelector } from "react-redux";
 
 import "./styles.scss";
-import { createPost, updatePost } from "../../features/postsActions";
+import { createReply, updateReply } from "../../features/replyActions";
 import { ReplyContext } from "../Posts/Post/Replies/Replies";
 
 export const ReplyForm = (props) => {
@@ -17,24 +17,24 @@ export const ReplyForm = (props) => {
   const parentId = props.id;
 
   const { currentReplyId, setCurrentReplyId } = useContext(ReplyContext);
-  const { currentPostId, setCurrentPostId } = "";
+  // const { currentReplyId, setCurrentReplyId } = "";
 
   const dispatch = useDispatch();
 
   const posts = useSelector((state) => state.posts);
-  const existingPost = currentPostId
-    ? posts.find((post) => post._id === currentPostId)
+  const existingReply = currentReplyId
+    ? posts.find((post) => post._id === currentReplyId)
     : null;
 
   // Fill form with post to edit when Edit is clicked
   useEffect(() => {
-    if (currentPostId) {
-      setTitle(existingPost.title);
-      setAuthor(existingPost.author);
-      setContent(existingPost.content);
+    if (currentReplyId) {
+      setTitle(existingReply.title);
+      setAuthor(existingReply.author);
+      setContent(existingReply.content);
     }
     // eslint-disable-next-line
-  }, [currentPostId]);
+  }, [currentReplyId]);
 
   const fieldsCheck = [title, author, content];
   const canSave = fieldsCheck.every(Boolean) && reqStatus === "idle";
@@ -46,58 +46,59 @@ export const ReplyForm = (props) => {
     setContent("");
     setImage("");
     setFileKey(randomString);
-    if (currentPostId) setCurrentPostId("");
+    if (currentReplyId) setCurrentReplyId("");
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (canSave) {
-      if (!existingPost) {
+      if (!existingReply) {
         //-------------------- CREATE POST
         try {
           setReqStatus("pending");
-          await dispatch(createPost({ title, author, content, image }));
+          await dispatch(createReply({ title, author, content, image }));
         } catch (error) {
           console.log(error);
         } finally {
           setReqStatus("idle");
-          setCurrentPostId("");
+          setCurrentReplyId("");
           clearForm();
         }
       } else {
         //-------------------- EDIT POST
         try {
-          const updatedPost = image
+          const updatedReply = image
             ? { title, author, content, image }
             : { title, author, content };
 
           setReqStatus("pending");
-          await dispatch(updatePost(currentPostId, updatedPost));
+          await dispatch(updateReply(currentReplyId, updatedReply));
         } catch (error) {
           console.log(error);
         } finally {
           setReqStatus("idle");
-          setCurrentPostId("");
+          setCurrentReplyId("");
           clearForm();
         }
       }
     }
   };
 
-  const formWrapperStyle = currentPostId
+  const formWrapperStyle = currentReplyId
     ? "form-wrapper form-edit"
     : "form-wrapper";
 
   return (
     <div className={formWrapperStyle}>
       <form className="form" autoComplete="off" onSubmit={handleSubmit}>
-        <h2>{currentPostId ? "Edit" : "Add a"} Reply</h2>
+        <h2>{currentReplyId ? "Edit" : "Add a"} Reply</h2>
         <input
           className="form-input"
           type="text"
           name="title"
-          placeholder="Post title"
+          placeholder="Reply title"
           value={title}
+          maxlength="64"
           onChange={(e) => setTitle(e.target.value)}
         />{" "}
         <br />
@@ -107,6 +108,7 @@ export const ReplyForm = (props) => {
           name="author"
           placeholder="Your name"
           value={author}
+          maxlength="32"
           onChange={(e) => setAuthor(e.target.value)}
         />{" "}
         <br />
@@ -130,10 +132,10 @@ export const ReplyForm = (props) => {
         <input
           type="submit"
           className="button"
-          value={currentPostId ? "Update" : "Post"}
+          value={currentReplyId ? "Update" : "Reply"}
         />
         <button className="button clear-button" onClick={clearForm}>
-          {currentPostId ? "Cancel" : "Clear"}
+          {currentReplyId ? "Cancel" : "Clear"}
         </button>
       </form>
     </div>

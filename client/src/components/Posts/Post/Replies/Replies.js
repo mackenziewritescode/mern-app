@@ -3,9 +3,10 @@ import { useSelector, useDispatch } from "react-redux";
 
 import "./styles.scss";
 import { getPosts } from "../../../../features/postsActions";
+import { getReplies } from "../../../../features/repliesActions";
 import { FullPost } from "./FullPost/FullPost";
 import { Reply } from "./Reply/Reply";
-import { ReplyForm } from "../../../Forms/ReplyForm";
+// import { ReplyForm } from "../../../Forms/ReplyForm";
 
 export const ReplyContext = createContext();
 
@@ -18,13 +19,20 @@ export const Replies = ({ match }) => {
 
   useEffect(() => {
     dispatch(getPosts());
+    dispatch(getReplies());
   }, [dispatch]);
 
   const post = useSelector((state) =>
     state.posts.find((post) => post._id === postId)
   );
 
-  const replies = []; // useDispatch
+  const replies = useSelector((state) =>
+    state.replies.filter((reply) => reply.parent === postId)
+  );
+
+  const replyIndex = (reply) => {
+    return replies.indexOf(reply) + 1;
+  };
 
   const fullPost = post ? (
     <FullPost
@@ -40,14 +48,27 @@ export const Replies = ({ match }) => {
     />
   ) : null;
 
-  const renderedReplies = replies.map((reply) => <Reply />);
+  const renderedReplies =
+    replies && post
+      ? replies.map((reply) => (
+          <Reply
+            key={reply._id}
+            id={reply._id}
+            number={replyIndex(reply)}
+            author={reply.author}
+            content={reply.content}
+            image={reply.image}
+            date={reply.date}
+          />
+        ))
+      : null;
 
   return (
     <ReplyContext.Provider value={{ currentReplyId, setCurrentReplyId }}>
       <div id="replies">
         <h2>Title</h2>
         <div id="content">
-          <ReplyForm id={postId} />
+          {/* <ReplyForm id={postId} /> */}
           <div id="reply-wrapper">
             {fullPost}
             {renderedReplies}

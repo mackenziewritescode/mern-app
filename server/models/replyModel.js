@@ -9,7 +9,7 @@ const replySchema = mongoose.Schema({
     type: Date,
     default: new Date(),
   },
-  replyNum: Number,
+  // replyNum: Number,
 });
 
 const reply = mongoose.model("reply", replySchema);
