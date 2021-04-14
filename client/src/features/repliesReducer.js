@@ -1,6 +1,6 @@
 const repliesReducer = (replies = [], action) => {
   switch (action.type) {
-    case "FETCH_ALL":
+    case "FETCH_REPLIES":
       return action.payload;
     default:
       return replies;

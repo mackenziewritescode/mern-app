@@ -98,6 +98,7 @@ export const ReplyForm = (props) => {
           name="title"
           placeholder="Reply title"
           value={title}
+          maxlength="64"
           onChange={(e) => setTitle(e.target.value)}
         />{" "}
         <br />
@@ -107,6 +108,7 @@ export const ReplyForm = (props) => {
           name="author"
           placeholder="Your name"
           value={author}
+          maxlength="32"
           onChange={(e) => setAuthor(e.target.value)}
         />{" "}
         <br />

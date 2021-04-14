@@ -29,7 +29,10 @@ export const Replies = ({ match }) => {
   const replies = useSelector((state) =>
     state.replies.filter((reply) => reply.parent === postId)
   );
-  // why is state.replies the same as state.posts?
+
+  const replyIndex = (reply) => {
+    return replies.indexOf(reply) + 1;
+  };
 
   const fullPost = post ? (
     <FullPost
@@ -45,19 +48,20 @@ export const Replies = ({ match }) => {
     />
   ) : null;
 
-  const renderedReplies = replies
-    ? replies.map((reply) => (
-        <Reply
-          key={reply._id}
-          id={reply._id}
-          title={reply.title}
-          author={reply.author}
-          content={reply.content}
-          image={reply.image}
-          date={reply.date}
-        />
-      ))
-    : null;
+  const renderedReplies =
+    replies && post
+      ? replies.map((reply) => (
+          <Reply
+            key={reply._id}
+            id={reply._id}
+            number={replyIndex(reply)}
+            author={reply.author}
+            content={reply.content}
+            image={reply.image}
+            date={reply.date}
+          />
+        ))
+      : null;
 
   return (
     <ReplyContext.Provider value={{ currentReplyId, setCurrentReplyId }}>
