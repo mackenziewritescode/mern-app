@@ -26,7 +26,7 @@ export const ReplyMenu = ({ id }) => {
   };
 
   return (
-    <div className="menu">
+    <div className="reply-menu">
       <Menu
         menuButton={
           <MenuButton className="menu-button">

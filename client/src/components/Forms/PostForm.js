@@ -95,7 +95,7 @@ export const PostForm = () => {
           name="title"
           placeholder="Post title"
           value={title}
-          maxlength="64"
+          maxLength="64"
           onChange={(e) => setTitle(e.target.value)}
         />{" "}
         <br />
@@ -105,7 +105,7 @@ export const PostForm = () => {
           name="author"
           placeholder="Your name"
           value={author}
-          maxlength="32"
+          maxLength="32"
           onChange={(e) => setAuthor(e.target.value)}
         />{" "}
         <br />

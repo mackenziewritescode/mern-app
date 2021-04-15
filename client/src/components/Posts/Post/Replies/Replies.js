@@ -6,7 +6,7 @@ import { getPosts } from "../../../../features/postsActions";
 import { getReplies } from "../../../../features/repliesActions";
 import { FullPost } from "./FullPost/FullPost";
 import { Reply } from "./Reply/Reply";
-// import { ReplyForm } from "../../../Forms/ReplyForm";
+import { ReplyForm } from "../../../Forms/ReplyForm";
 
 export const ReplyContext = createContext();
 
@@ -68,7 +68,7 @@ export const Replies = ({ match }) => {
       <div id="replies">
         <h2>Title</h2>
         <div id="content">
-          {/* <ReplyForm id={postId} /> */}
+          <ReplyForm parentId={postId} />
           <div id="reply-wrapper">
             {fullPost}
             {renderedReplies}

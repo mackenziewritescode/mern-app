@@ -3,10 +3,13 @@ import FileBase64 from "react-file-base64";
 import { useDispatch, useSelector } from "react-redux";
 
 import "./styles.scss";
-import { createReply, updateReply } from "../../features/replyActions";
+import {
+  createReply,
+  // updateReply
+} from "../../features/repliesActions";
 import { ReplyContext } from "../Posts/Post/Replies/Replies";
 
-export const ReplyForm = (props) => {
+export const ReplyForm = ({ parentId }) => {
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
   const [content, setContent] = useState("");
@@ -14,29 +17,26 @@ export const ReplyForm = (props) => {
   const [reqStatus, setReqStatus] = useState("idle");
   const [fileKey, setFileKey] = useState("");
 
-  const parentId = props.id;
-
   const { currentReplyId, setCurrentReplyId } = useContext(ReplyContext);
-  // const { currentReplyId, setCurrentReplyId } = "";
 
   const dispatch = useDispatch();
 
-  const posts = useSelector((state) => state.posts);
-  const existingReply = currentReplyId
-    ? posts.find((post) => post._id === currentReplyId)
-    : null;
+  // const posts = useSelector((state) => state.posts);
+  const existingReply = currentReplyId;
+  //   ? posts.find((post) => post._id === currentReplyId)
+  //   : null;
 
   // Fill form with post to edit when Edit is clicked
-  useEffect(() => {
-    if (currentReplyId) {
-      setTitle(existingReply.title);
-      setAuthor(existingReply.author);
-      setContent(existingReply.content);
-    }
-    // eslint-disable-next-line
-  }, [currentReplyId]);
+  // useEffect(() => {
+  //   if (currentReplyId) {
+  //     setTitle(existingReply.title);
+  //     setAuthor(existingReply.author);
+  //     setContent(existingReply.content);
+  //   }
+  //   // eslint-disable-next-line
+  // }, [currentReplyId]);
 
-  const fieldsCheck = [title, author, content];
+  const fieldsCheck = [author, content]; //----------------- add condition for title
   const canSave = fieldsCheck.every(Boolean) && reqStatus === "idle";
   const clearForm = () => {
     const randomString = Math.random().toString(36);
@@ -56,7 +56,9 @@ export const ReplyForm = (props) => {
         //-------------------- CREATE POST
         try {
           setReqStatus("pending");
-          await dispatch(createReply({ title, author, content, image }));
+          await dispatch(
+            createReply({ parent: parentId, author, content, image })
+          );
         } catch (error) {
           console.log(error);
         } finally {
@@ -64,22 +66,21 @@ export const ReplyForm = (props) => {
           setCurrentReplyId("");
           clearForm();
         }
-      } else {
-        //-------------------- EDIT POST
-        try {
-          const updatedReply = image
-            ? { title, author, content, image }
-            : { title, author, content };
-
-          setReqStatus("pending");
-          await dispatch(updateReply(currentReplyId, updatedReply));
-        } catch (error) {
-          console.log(error);
-        } finally {
-          setReqStatus("idle");
-          setCurrentReplyId("");
-          clearForm();
-        }
+        //   } else {
+        //     //-------------------- EDIT POST
+        //     try {
+        //       const updatedReply = image
+        //         ? { title, author, content, image }
+        //         : { title, author, content };
+        //       setReqStatus("pending");
+        //       await dispatch(updateReply(currentReplyId, updatedReply));
+        //     } catch (error) {
+        //       console.log(error);
+        //     } finally {
+        //       setReqStatus("idle");
+        //       setCurrentReplyId("");
+        //       clearForm();
+        //     }
       }
     }
   };
@@ -96,9 +97,9 @@ export const ReplyForm = (props) => {
           className="form-input"
           type="text"
           name="title"
-          placeholder="Reply title"
+          placeholder="Post title"
           value={title}
-          maxlength="64"
+          maxLength="64"
           onChange={(e) => setTitle(e.target.value)}
         />{" "}
         <br />
@@ -108,7 +109,7 @@ export const ReplyForm = (props) => {
           name="author"
           placeholder="Your name"
           value={author}
-          maxlength="32"
+          maxLength="32"
           onChange={(e) => setAuthor(e.target.value)}
         />{" "}
         <br />

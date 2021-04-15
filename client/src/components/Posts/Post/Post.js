@@ -35,7 +35,7 @@ export const Post = (props) => {
             Posted by {props.author} {time}.
           </div>
           <div className="post-item content">{props.content}</div>
-          <div className="replies">Replies: {props.replies.length}</div>
+          <div className="replies">Replies: XX</div>
         </div>
       </Link>
     </div>
