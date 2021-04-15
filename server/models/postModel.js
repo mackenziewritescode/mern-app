@@ -9,10 +9,6 @@ const postSchema = mongoose.Schema({
     type: Date,
     default: new Date(),
   },
-  // replies: {
-  //   type: [Object],
-  //   default: [],
-  // },
 });
 
 const post = mongoose.model("post", postSchema);
