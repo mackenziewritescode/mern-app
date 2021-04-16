@@ -17,9 +17,6 @@ class Confirmation extends React.Component {
           backdrop={enableEscape ? true : "static"}
           keyboard={enableEscape}
         >
-          {/* <Modal.Header>
-            <Modal.Title>Are you sure you want to delete this post?</Modal.Title>
-          </Modal.Header> */}
           <Modal.Body>Are you sure you want to delete this post?</Modal.Body>
           <Modal.Footer className="footer">
             <Button

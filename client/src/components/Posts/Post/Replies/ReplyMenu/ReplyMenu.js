@@ -5,24 +5,24 @@ import { useDispatch } from "react-redux";
 import "@szhsin/react-menu/dist/index.css";
 import "./styles.scss";
 import { HiDotsHorizontal } from "react-icons/hi";
-// import { PostContext } from "../../Posts";
-// import { deletePost } from "../../../../features/postsActions";
-// import { confirm } from "../../../Confirm/Confirm";
+import { ReplyContext } from "../Replies";
+import { deleteReply } from "../../../../features/repliesActions";
+import { confirm } from "../../../../Confirm/Confirm";
 
 export const ReplyMenu = ({ id }) => {
-  // const { setCurrentPostId } = useContext(PostContext);
+  const { setCurrentReplyId } = useContext(ReplyContext);
 
   const dispatch = useDispatch();
 
   const handleEdit = () => {
-    // setCurrentPostId(id);
-    // window.scrollTo({ top: 0, behavior: "smooth" });
+    setCurrentReplyId(id);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const handleDelete = async () => {
-    // if (await confirm("Are your sure?")) {
-    //   await dispatch(deletePost(id));
-    // }
+    if (await confirm("Are your sure?")) {
+      await dispatch(deleteReply(id));
+    }
   };
 
   return (

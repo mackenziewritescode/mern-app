@@ -21,7 +21,16 @@ export const ReplyForm = ({ parentId }) => {
 
   const dispatch = useDispatch();
 
-  const clearForm = () => {};
+  const clearForm = () => {
+    const randomString = Math.random().toString(36);
+
+    setTitle("");
+    setAuthor("");
+    setContent("");
+    setImage("");
+    setFileKey(randomString);
+    if (currentReplyId) setCurrentReplyId("");
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -33,6 +42,7 @@ export const ReplyForm = ({ parentId }) => {
       console.log(error);
     } finally {
       setReqStatus("idle");
+      clearForm();
     }
   };
 
