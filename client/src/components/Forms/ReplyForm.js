@@ -21,23 +21,6 @@ export const ReplyForm = ({ parentId }) => {
 
   const dispatch = useDispatch();
 
-  // const posts = useSelector((state) => state.posts);
-  const existingReply = currentReplyId;
-  //   ? posts.find((post) => post._id === currentReplyId)
-  //   : null;
-
-  // Fill form with post to edit when Edit is clicked
-  // useEffect(() => {
-  //   if (currentReplyId) {
-  //     setTitle(existingReply.title);
-  //     setAuthor(existingReply.author);
-  //     setContent(existingReply.content);
-  //   }
-  //   // eslint-disable-next-line
-  // }, [currentReplyId]);
-
-  const fieldsCheck = [author, content]; //----------------- add condition for title
-  const canSave = fieldsCheck.every(Boolean) && reqStatus === "idle";
   const clearForm = () => {
     const randomString = Math.random().toString(36);
 
@@ -51,37 +34,15 @@ export const ReplyForm = ({ parentId }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (canSave) {
-      if (!existingReply) {
-        //-------------------- CREATE POST
-        try {
-          setReqStatus("pending");
-          await dispatch(
-            createReply({ parent: parentId, author, content, image })
-          );
-        } catch (error) {
-          console.log(error);
-        } finally {
-          setReqStatus("idle");
-          setCurrentReplyId("");
-          clearForm();
-        }
-        //   } else {
-        //     //-------------------- EDIT POST
-        //     try {
-        //       const updatedReply = image
-        //         ? { title, author, content, image }
-        //         : { title, author, content };
-        //       setReqStatus("pending");
-        //       await dispatch(updateReply(currentReplyId, updatedReply));
-        //     } catch (error) {
-        //       console.log(error);
-        //     } finally {
-        //       setReqStatus("idle");
-        //       setCurrentReplyId("");
-        //       clearForm();
-        //     }
-      }
+    try {
+      setReqStatus("pending");
+      console.log(parentId, author, content, image);
+      await dispatch(createReply({ parent: parentId, author, content, image }));
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setReqStatus("idle");
+      clearForm();
     }
   };
 
@@ -142,3 +103,71 @@ export const ReplyForm = ({ parentId }) => {
     </div>
   );
 };
+
+// // const posts = useSelector((state) => state.posts);
+// const existingReply = currentReplyId;
+// //   ? posts.find((post) => post._id === currentReplyId)
+// //   : null;
+
+// // Fill form with post to edit when Edit is clicked
+// useEffect(() => {
+//   if (currentReplyId) {
+//     setTitle(existingReply.title);
+//     setAuthor(existingReply.author);
+//     setContent(existingReply.content);
+//   }
+//   // eslint-disable-next-line
+// }, [currentReplyId]);
+
+// const fieldsCheck = [author, content]; //----------------- add condition for title
+// const canSave = fieldsCheck.every(Boolean) && reqStatus === "idle";
+// const clearForm = () => {
+//   const randomString = Math.random().toString(36);
+
+//   setTitle("");
+//   setAuthor("");
+//   setContent("");
+//   setImage("");
+//   setFileKey(randomString);
+//   if (currentReplyId) setCurrentReplyId("");
+// };
+
+// const handleSubmit = async (e) => {
+//   e.preventDefault();
+//   if (canSave) {
+//     if (!existingReply) {
+//       //-------------------- CREATE POST
+//       try {
+//         setReqStatus("pending");
+//         await dispatch(
+//           createReply({ parent: parentId, author, content, image })
+//         );
+//       } catch (error) {
+//         console.log(error);
+//       } finally {
+//         setReqStatus("idle");
+//         setCurrentReplyId("");
+//         clearForm();
+//       }
+//         } else {
+//           //-------------------- EDIT POST
+//           try {
+//             const updatedReply = image
+//               ? { title, author, content, image }
+//               : { title, author, content };
+//             setReqStatus("pending");
+//             await dispatch(updateReply(currentReplyId, updatedReply));
+//           } catch (error) {
+//             console.log(error);
+//           } finally {
+//             setReqStatus("idle");
+//             setCurrentReplyId("");
+//             clearForm();
+//           }
+//     }
+//   }
+// };
+
+// const formWrapperStyle = currentReplyId
+//   ? "form-wrapper form-edit"
+//   : "form-wrapper";

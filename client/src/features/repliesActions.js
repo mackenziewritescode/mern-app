@@ -9,9 +9,9 @@ export const getReplies = () => async (dispatch) => {
   }
 };
 
-export const createReply = () => async (dispatch) => {
+export const createReply = (reply) => async (dispatch) => {
   try {
-    const { data } = await api.createReply();
+    const { data } = await api.createReply(reply);
     dispatch({ type: "CREATE_REPLY", payload: data });
   } catch (error) {
     console.log(error);
