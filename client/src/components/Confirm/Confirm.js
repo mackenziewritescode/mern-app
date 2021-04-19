@@ -8,7 +8,9 @@ import { confirmable, createConfirmation } from "react-confirm";
 
 class Confirmation extends React.Component {
   render() {
-    const { show, proceed, enableEscape = true } = this.props;
+    const { show, proceed, enableEscape = true, confirmation } = this.props;
+    console.log(confirmation);
+
     return (
       <div className="static-modal">
         <Modal
@@ -17,7 +19,11 @@ class Confirmation extends React.Component {
           backdrop={enableEscape ? true : "static"}
           keyboard={enableEscape}
         >
-          <Modal.Body>Are you sure you want to delete this post?</Modal.Body>
+          <Modal.Body>
+            {confirmation === "post"
+              ? "Are you sure you want to delete this post and its replies?"
+              : "Are you sure you want to delete this reply?"}
+          </Modal.Body>
           <Modal.Footer className="footer">
             <Button
               variant="secondary"

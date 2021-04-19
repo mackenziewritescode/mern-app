@@ -20,7 +20,7 @@ export const PostMenu = ({ id }) => {
   };
 
   const handleDelete = async () => {
-    if (await confirm("Are your sure?")) {
+    if (await confirm("post")) {
       await dispatch(deletePost(id));
     }
   };

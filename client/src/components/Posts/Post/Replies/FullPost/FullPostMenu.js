@@ -7,9 +7,10 @@ import "./styles.scss";
 import { HiDotsHorizontal } from "react-icons/hi";
 import { ReplyContext } from "../Replies";
 import { deleteReply } from "../../../../../features/repliesActions";
+import { deletePost } from "../../../../../features/postsActions";
 import { confirm } from "../../../../Confirm/Confirm";
 
-export const ReplyMenu = ({ id }) => {
+export const FullPostMenu = ({ id }) => {
   const { setCurrentReplyId } = useContext(ReplyContext);
 
   const dispatch = useDispatch();
@@ -20,8 +21,8 @@ export const ReplyMenu = ({ id }) => {
   };
 
   const handleDelete = async () => {
-    if (await confirm("reply")) {
-      await dispatch(deleteReply(id));
+    if (await confirm("post")) {
+      await dispatch(deletePost(id));
     }
   };
 

@@ -2,7 +2,7 @@ import React from "react";
 
 import "./styles.scss";
 import { formatDate } from "../../formatDate";
-import { ReplyMenu } from "../ReplyMenu/ReplyMenu";
+import { FullPostMenu } from "./FullPostMenu";
 
 export const FullPost = (props) => {
   const time = formatDate(props.date);
@@ -21,7 +21,7 @@ export const FullPost = (props) => {
       <div className="post-content">
         <div className="title-and-menu">
           <h3>{props.title}</h3>
-          <ReplyMenu id={props.id} />
+          <FullPostMenu id={props.id} />
         </div>
         <div className="post-item author">
           Posted by {props.author} {time}.
