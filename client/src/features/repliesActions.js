@@ -17,3 +17,12 @@ export const createReply = (reply) => async (dispatch) => {
     console.log(error);
   }
 };
+
+export const deleteReply = (id) => async (dispatch) => {
+  try {
+    await api.deleteReply(id);
+    dispatch({ type: "DELETE_REPLY", payload: id });
+  } catch (error) {
+    console.log(error);
+  }
+};

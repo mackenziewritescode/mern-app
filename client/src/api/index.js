@@ -18,3 +18,5 @@ const replyUrl = "http://localhost:5000/replies";
 export const fetchReplies = () => axios.get(replyUrl);
 
 export const createReply = (newReply) => axios.post(replyUrl, newReply);
+
+export const deleteReply = (id) => axios.delete(`${replyUrl}/${id}`);

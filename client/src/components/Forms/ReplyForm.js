@@ -43,6 +43,7 @@ export const ReplyForm = ({ parentId }) => {
     } finally {
       setReqStatus("idle");
       clearForm();
+      window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
     }
   };
 

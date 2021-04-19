@@ -4,6 +4,8 @@ const repliesReducer = (replies = [], action) => {
       return action.payload;
     case "CREATE_REPLY":
       return [...replies, action.payload];
+    case "DELETE_REPLY":
+      return replies.filter((reply) => reply._id !== action.payload);
     default:
       return replies;
   }
