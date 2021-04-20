@@ -9,7 +9,6 @@ import { confirmable, createConfirmation } from "react-confirm";
 class Confirmation extends React.Component {
   render() {
     const { show, proceed, enableEscape = true, confirmation } = this.props;
-    console.log(confirmation);
 
     return (
       <div className="static-modal">

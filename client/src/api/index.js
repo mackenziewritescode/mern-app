@@ -20,3 +20,6 @@ export const fetchReplies = () => axios.get(replyUrl);
 export const createReply = (newReply) => axios.post(replyUrl, newReply);
 
 export const deleteReply = (id) => axios.delete(`${replyUrl}/${id}`);
+
+export const deleteChildren = (parentId) =>
+  axios.delete(`${replyUrl}/parent/${parentId}`);

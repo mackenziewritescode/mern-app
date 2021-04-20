@@ -26,3 +26,12 @@ export const deleteReply = (id) => async (dispatch) => {
     console.log(error);
   }
 };
+
+export const deleteChildren = (parentId) => async (dispatch) => {
+  try {
+    await api.deleteChildren(parentId);
+    dispatch({ type: "DELETE_CHILDREN", payload: parentId });
+  } catch (error) {
+    console.log(error);
+  }
+};

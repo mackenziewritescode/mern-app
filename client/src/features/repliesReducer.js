@@ -6,6 +6,8 @@ const repliesReducer = (replies = [], action) => {
       return [...replies, action.payload];
     case "DELETE_REPLY":
       return replies.filter((reply) => reply._id !== action.payload);
+    case "DELETE_CHILDREN":
+      return replies.filter((reply) => reply.parent !== action.payload);
     default:
       return replies;
   }

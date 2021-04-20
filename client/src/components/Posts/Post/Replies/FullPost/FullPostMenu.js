@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useSelector } from "react";
 import { Menu, MenuItem, MenuButton } from "@szhsin/react-menu";
 import { useDispatch } from "react-redux";
 
@@ -6,7 +6,7 @@ import "@szhsin/react-menu/dist/index.css";
 import "./styles.scss";
 import { HiDotsHorizontal } from "react-icons/hi";
 import { ReplyContext } from "../Replies";
-import { deleteReply } from "../../../../../features/repliesActions";
+import { deleteChildren } from "../../../../../features/repliesActions";
 import { deletePost } from "../../../../../features/postsActions";
 import { confirm } from "../../../../Confirm/Confirm";
 
@@ -22,6 +22,7 @@ export const FullPostMenu = ({ id }) => {
 
   const handleDelete = async () => {
     if (await confirm("post")) {
+      await dispatch(deleteChildren(id));
       await dispatch(deletePost(id));
     }
   };

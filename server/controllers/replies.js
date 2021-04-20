@@ -32,3 +32,13 @@ export const deleteReply = async (req, res) => {
 
   res.json(deletedReply);
 };
+
+export const deleteChildren = async (req, res) => {
+  const { parentId } = req.params;
+  try {
+    const deletedChildren = await Reply.deleteMany({ parent: parentId });
+    res.json(deletedChildren);
+  } catch (error) {
+    res.json({ message: error });
+  }
+};

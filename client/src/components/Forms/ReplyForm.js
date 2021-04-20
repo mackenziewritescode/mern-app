@@ -36,7 +36,6 @@ export const ReplyForm = ({ parentId }) => {
     e.preventDefault();
     try {
       setReqStatus("pending");
-      console.log(parentId, author, content, image);
       await dispatch(createReply({ parent: parentId, author, content, image }));
     } catch (error) {
       console.log(error);
