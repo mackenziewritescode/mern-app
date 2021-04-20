@@ -22,8 +22,15 @@ export const FullPostMenu = ({ id }) => {
 
   const handleDelete = async () => {
     if (await confirm("post")) {
-      await dispatch(deleteChildren(id));
-      await dispatch(deletePost(id));
+      try {
+        await dispatch(deleteChildren(id));
+        await dispatch(deletePost(id));
+      } catch (error) {
+        console.log(error);
+      } finally {
+        window.history.pushState({}, "home", "/");
+        window.location.reload();
+      }
     }
   };
 
