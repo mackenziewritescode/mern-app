@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import "./styles.scss";
 import { createPost, updatePost } from "../../features/postsActions";
-import { PostContext } from "../Posts/Posts";
+import { PostContext } from "../../App";
 
 export const PostForm = () => {
   const [title, setTitle] = useState("");

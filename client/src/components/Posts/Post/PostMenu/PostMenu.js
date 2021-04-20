@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import "@szhsin/react-menu/dist/index.css";
 import "./styles.scss";
 import { HiDotsHorizontal } from "react-icons/hi";
-import { PostContext } from "../../Posts";
+import { PostContext } from "../../../../App";
 import { deletePost } from "../../../../features/postsActions";
 import { confirm } from "../../../Confirm/Confirm";
 

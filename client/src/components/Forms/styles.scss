@@ -9,7 +9,12 @@
   border-radius: 12px;
   border: solid rgba(0, 0, 0, 0.1) 3px;
   box-sizing: border-box;
-  transition: 500ms;
+
+  -webkit-animation: fadein 1s;
+  -moz-animation: fadein 1s;
+  -ms-animation: fadein 1s;
+  -o-animation: fadein 1s;
+  animation: fadein 1s;
 
   h2 {
     text-align: center;
@@ -66,5 +71,22 @@
 @media (max-width: 1200px) {
   .form-wrapper {
     width: 100%;
+  }
+}
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@-moz-keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }

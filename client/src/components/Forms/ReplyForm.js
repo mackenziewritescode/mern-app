@@ -54,7 +54,7 @@ export const ReplyForm = ({ parentId }) => {
     <div className={formWrapperStyle}>
       <form className="form" autoComplete="off" onSubmit={handleSubmit}>
         <h2>{currentReplyId ? "Edit" : "Add a"} Reply</h2>
-        <input
+        {/* <input
           className="form-input"
           type="text"
           name="title"
@@ -63,7 +63,7 @@ export const ReplyForm = ({ parentId }) => {
           maxLength="64"
           onChange={(e) => setTitle(e.target.value)}
         />{" "}
-        <br />
+        <br /> */}
         <input
           className="form-input"
           type="text"

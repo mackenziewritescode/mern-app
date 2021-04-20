@@ -1,4 +1,4 @@
-import React, { useEffect, createContext, useState } from "react";
+import React, { useEffect, createContext, useState, useContext } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import "./styles.scss";
@@ -7,11 +7,15 @@ import { getReplies } from "../../../../features/repliesActions";
 import { FullPost } from "./FullPost/FullPost";
 import { Reply } from "./Reply/Reply";
 import { ReplyForm } from "../../../Forms/ReplyForm";
+import { PostForm } from "../../../Forms/PostForm";
+import { PostContext } from "../../../../App";
 
 export const ReplyContext = createContext();
 
 export const Replies = ({ match }) => {
   const [currentReplyId, setCurrentReplyId] = useState("");
+
+  const { currentPostId } = useContext(PostContext);
 
   const { postId } = match.params;
 
@@ -65,16 +69,26 @@ export const Replies = ({ match }) => {
 
   return (
     <ReplyContext.Provider value={{ currentReplyId, setCurrentReplyId }}>
-      <div id="replies">
-        <h2>Title</h2>
-        <div id="content">
-          <ReplyForm parentId={postId} />
-          <div id="reply-wrapper">
-            {fullPost}
-            {renderedReplies}
+      {/* If the post doesn't exist */}
+      {!post ? (
+        ""
+      ) : (
+        <div id="replies">
+          <h2>Title</h2>
+          <div id="content">
+            {/* Check for edit post form or reply form */}
+            {!currentPostId ? (
+              <ReplyForm parentId={postId} />
+            ) : (
+              <PostForm id={postId} />
+            )}
+            <div id="reply-wrapper">
+              {fullPost}
+              {renderedReplies}
+            </div>
           </div>
         </div>
-      </div>
+      )}
     </ReplyContext.Provider>
   );
 };

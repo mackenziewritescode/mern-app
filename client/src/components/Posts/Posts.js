@@ -1,4 +1,4 @@
-import React, { useEffect, useState, createContext } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "./styles.scss";
 
@@ -7,11 +7,9 @@ import { getReplies } from "../../features/repliesActions";
 import { Post } from "./Post/Post";
 import { PostForm } from "../Forms/PostForm";
 
-export const PostContext = createContext();
+// export const PostContext = createContext();
 
 export const Posts = () => {
-  const [currentPostId, setCurrentPostId] = useState("");
-
   const dispatch = useDispatch();
   const posts = useSelector((state) => state.posts);
   const replies = useSelector((state) => state.replies);
@@ -41,14 +39,12 @@ export const Posts = () => {
     .reverse();
 
   return (
-    <PostContext.Provider value={{ currentPostId, setCurrentPostId }}>
-      <div id="posts">
-        <h2>REST with MERN</h2>
-        <div id="content">
-          <PostForm />
-          <div id="post-wrapper">{renderedPosts}</div>
-        </div>
+    <div id="posts">
+      <h2>REST with MERN</h2>
+      <div id="content">
+        <PostForm />
+        <div id="post-wrapper">{renderedPosts}</div>
       </div>
-    </PostContext.Provider>
+    </div>
   );
 };

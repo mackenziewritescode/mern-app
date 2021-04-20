@@ -1,22 +1,22 @@
-import React, { useContext, useSelector } from "react";
+import React, { useContext } from "react";
 import { Menu, MenuItem, MenuButton } from "@szhsin/react-menu";
 import { useDispatch } from "react-redux";
 
 import "@szhsin/react-menu/dist/index.css";
 import "./styles.scss";
 import { HiDotsHorizontal } from "react-icons/hi";
-import { ReplyContext } from "../Replies";
+import { PostContext } from "../../../../../App";
 import { deleteChildren } from "../../../../../features/repliesActions";
 import { deletePost } from "../../../../../features/postsActions";
 import { confirm } from "../../../../Confirm/Confirm";
 
 export const FullPostMenu = ({ id }) => {
-  const { setCurrentReplyId } = useContext(ReplyContext);
+  const { setCurrentPostId } = useContext(PostContext);
 
   const dispatch = useDispatch();
 
   const handleEdit = () => {
-    setCurrentReplyId(id);
+    setCurrentPostId(id);
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
