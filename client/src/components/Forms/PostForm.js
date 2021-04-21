@@ -19,6 +19,7 @@ export const PostForm = () => {
   const dispatch = useDispatch();
 
   const posts = useSelector((state) => state.posts);
+
   const existingPost = currentPostId
     ? posts.find((post) => post._id === currentPostId)
     : null;
@@ -131,10 +132,10 @@ export const PostForm = () => {
           className="button"
           value={currentPostId ? "Update" : "Post"}
         />
-        <button className="button clear-button" onClick={clearForm}>
-          {currentPostId ? "Cancel" : "Clear"}
-        </button>
       </form>
+      <button className="button clear-button" onClick={clearForm}>
+        {currentPostId ? "Cancel" : "Clear"}
+      </button>
     </div>
   );
 };

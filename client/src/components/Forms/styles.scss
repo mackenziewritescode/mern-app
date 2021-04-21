@@ -9,12 +9,13 @@
   border-radius: 12px;
   border: solid rgba(0, 0, 0, 0.1) 3px;
   box-sizing: border-box;
+  transition: 1000ms;
 
-  -webkit-animation: fadein 1s;
-  -moz-animation: fadein 1s;
-  -ms-animation: fadein 1s;
-  -o-animation: fadein 1s;
-  animation: fadein 1s;
+  -webkit-animation: fadein 1000ms;
+  -moz-animation: fadein 1000ms;
+  -ms-animation: fadein 1000ms;
+  -o-animation: fadein 1000ms;
+  animation: fadein 1000ms;
 
   h2 {
     text-align: center;

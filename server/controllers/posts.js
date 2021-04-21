@@ -32,9 +32,7 @@ export const updatePost = async (req, res) => {
   const updatedPost = await Post.findByIdAndUpdate(
     id,
     { ...post, id },
-    {
-      new: true,
-    }
+    { new: true }
   );
 
   res.json(updatedPost);
