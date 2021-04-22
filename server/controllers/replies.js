@@ -34,7 +34,6 @@ export const updateReply = async (req, res) => {
     { ...reply, id },
     { new: true }
   );
-
   res.json(updatedReply);
 };
 

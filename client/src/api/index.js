@@ -19,9 +19,8 @@ export const fetchReplies = () => axios.get(replyUrl);
 
 export const createReply = (newReply) => axios.post(replyUrl, newReply);
 
-export const updateReply = (id, updatedReply) => {
+export const updateReply = (id, updatedReply) =>
   axios.patch(`${replyUrl}/${id}`, updatedReply);
-};
 
 export const deleteReply = (id) => axios.delete(`${replyUrl}/${id}`);
 

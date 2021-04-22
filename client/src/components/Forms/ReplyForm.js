@@ -71,9 +71,7 @@ export const ReplyForm = ({ parentId }) => {
             : { parent: parentId, author, content };
 
           setReqStatus("pending");
-          // await dispatch(updateReply(currentReplyId, updatedReply));
-          createReply({ parent: parentId, author, content, image });
-          console.log("dispatched!");
+          await dispatch(updateReply(currentReplyId, updatedReply));
         } catch (error) {
           console.log(error);
         } finally {

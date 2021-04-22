@@ -34,7 +34,6 @@ export const updatePost = async (req, res) => {
     { ...post, id },
     { new: true }
   );
-
   res.json(updatedPost);
 };
 
