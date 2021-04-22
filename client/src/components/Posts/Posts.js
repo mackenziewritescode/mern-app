@@ -7,8 +7,6 @@ import { getReplies } from "../../features/repliesActions";
 import { Post } from "./Post/Post";
 import { PostForm } from "../Forms/PostForm";
 
-// export const PostContext = createContext();
-
 export const Posts = () => {
   const dispatch = useDispatch();
   const posts = useSelector((state) => state.posts);
@@ -40,7 +38,7 @@ export const Posts = () => {
 
   return (
     <div id="posts">
-      <h2>REST with MERN</h2>
+      <h2>Dynamic Posts and Replies</h2>
       <div id="content">
         <PostForm />
         <div id="post-wrapper">{renderedPosts}</div>

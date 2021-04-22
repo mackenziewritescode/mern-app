@@ -31,6 +31,9 @@ export const ReplyForm = ({ parentId }) => {
     // eslint-disable-next-line
   }, [currentReplyId]);
 
+  const fieldsCheck = [author, content];
+  const canSave = fieldsCheck.every(Boolean) && reqStatus === "idle";
+
   const clearForm = () => {
     const randomString = Math.random().toString(36);
     setAuthor("");
@@ -42,43 +45,46 @@ export const ReplyForm = ({ parentId }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (canSave) {
+      if (!currentReplyId) {
+        //-------------------- CREATE REPLY
+        try {
+          setReqStatus("pending");
+          await dispatch(
+            createReply({ parent: parentId, author, content, image })
+          );
+        } catch (error) {
+          console.log(error);
+        } finally {
+          setReqStatus("idle");
+          clearForm();
+          window.scrollTo({
+            top: document.body.scrollHeight,
+            behavior: "smooth",
+          });
+        }
+      } else {
+        //-------------------- EDIT REPLY
+        try {
+          const updatedReply = image
+            ? { parent: parentId, author, content, image }
+            : { parent: parentId, author, content };
 
-    if (!currentReplyId) {
-      //-------------------- CREATE REPLY
-      try {
-        setReqStatus("pending");
-        await dispatch(
-          createReply({ parent: parentId, author, content, image })
-        );
-      } catch (error) {
-        console.log(error);
-      } finally {
-        setReqStatus("idle");
-        clearForm();
-        window.scrollTo({
-          top: document.body.scrollHeight,
-          behavior: "smooth",
-        });
-      }
-    } else {
-      //-------------------- EDIT REPLY
-      try {
-        const updatedReply = image
-          ? { parent: parentId, author, content, image }
-          : { parent: parentId, author, content };
-
-        setReqStatus("pending");
-        await dispatch(updateReply(currentReplyId, updatedReply));
-      } catch (error) {
-        console.log(error);
-      } finally {
-        setReqStatus("idle");
-        setCurrentReplyId("");
-        clearForm();
-        window.scrollTo({
-          top: document.body.scrollHeight,
-          behavior: "smooth",
-        });
+          setReqStatus("pending");
+          // await dispatch(updateReply(currentReplyId, updatedReply));
+          createReply({ parent: parentId, author, content, image });
+          console.log("dispatched!");
+        } catch (error) {
+          console.log(error);
+        } finally {
+          setReqStatus("idle");
+          setCurrentReplyId("");
+          clearForm();
+          window.scrollTo({
+            top: document.body.scrollHeight,
+            behavior: "smooth",
+          });
+        }
       }
     }
   };
@@ -130,71 +136,3 @@ export const ReplyForm = ({ parentId }) => {
     </div>
   );
 };
-
-// // const posts = useSelector((state) => state.posts);
-// const existingReply = currentReplyId;
-// //   ? posts.find((post) => post._id === currentReplyId)
-// //   : null;
-
-// // Fill form with post to edit when Edit is clicked
-// useEffect(() => {
-//   if (currentReplyId) {
-//     setTitle(existingReply.title);
-//     setAuthor(existingReply.author);
-//     setContent(existingReply.content);
-//   }
-//   // eslint-disable-next-line
-// }, [currentReplyId]);
-
-// const fieldsCheck = [author, content]; //----------------- add condition for title
-// const canSave = fieldsCheck.every(Boolean) && reqStatus === "idle";
-// const clearForm = () => {
-//   const randomString = Math.random().toString(36);
-
-//   setTitle("");
-//   setAuthor("");
-//   setContent("");
-//   setImage("");
-//   setFileKey(randomString);
-//   if (currentReplyId) setCurrentReplyId("");
-// };
-
-// const handleSubmit = async (e) => {
-//   e.preventDefault();
-//   if (canSave) {
-//     if (!existingReply) {
-//       //-------------------- CREATE POST
-//       try {
-//         setReqStatus("pending");
-//         await dispatch(
-//           createReply({ parent: parentId, author, content, image })
-//         );
-//       } catch (error) {
-//         console.log(error);
-//       } finally {
-//         setReqStatus("idle");
-//         setCurrentReplyId("");
-//         clearForm();
-//       }
-//         } else {
-//           //-------------------- EDIT POST
-//           try {
-//             const updatedReply = image
-//               ? { title, author, content, image }
-//               : { title, author, content };
-//             setReqStatus("pending");
-//             await dispatch(updateReply(currentReplyId, updatedReply));
-//           } catch (error) {
-//             console.log(error);
-//           } finally {
-//             setReqStatus("idle");
-//             setCurrentReplyId("");
-//             clearForm();
-//           }
-//     }
-//   }
-// };
-
-// const formWrapperStyle = currentReplyId
-//   ? "form-wrapper form-edit"
-//   : "form-wrapper";
