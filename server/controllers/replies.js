@@ -22,6 +22,21 @@ export const createReply = async (req, res) => {
   }
 };
 
+export const updateReply = async (req, res) => {
+  const { id } = req.params;
+  const reply = req.body;
+
+  if (!mongoose.Types.ObjectId.isValid(id))
+    return res.status(404).send("Post not found.");
+
+  const updatedReply = await Reply.findByIdAndUpdate(
+    id,
+    { ...reply, id },
+    { new: true }
+  );
+  res.json(updatedReply);
+};
+
 export const deleteReply = async (req, res) => {
   const { id } = req.params;
 

@@ -18,6 +18,15 @@ export const createReply = (reply) => async (dispatch) => {
   }
 };
 
+export const updateReply = (id, reply) => async (dispatch) => {
+  try {
+    const { data } = await api.updateReply(id, reply);
+    dispatch({ type: "UPDATE_REPLY", payload: data });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const deleteReply = (id) => async (dispatch) => {
   try {
     await api.deleteReply(id);

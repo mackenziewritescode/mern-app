@@ -25,6 +25,7 @@ export const Replies = ({ match }) => {
     dispatch(getPosts());
     dispatch(getReplies());
   }, [dispatch]);
+  // }, [dispatch, currentReplyId]); // to get the replies to load
 
   const post = useSelector((state) =>
     state.posts.find((post) => post._id === postId)
