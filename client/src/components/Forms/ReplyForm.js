@@ -23,6 +23,7 @@ export const ReplyForm = ({ parentId }) => {
     ? replies.find((reply) => reply._id === currentReplyId)
     : null;
 
+  // Fill form with reply to edit when Edit is clicked
   useEffect(() => {
     if (currentReplyId) {
       setAuthor(existingReply.author);
