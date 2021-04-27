@@ -11,6 +11,7 @@ export const PostForm = () => {
   const [author, setAuthor] = useState("");
   const [content, setContent] = useState("");
   const [image, setImage] = useState("");
+  const [imageRemoved, setImageRemoved] = useState(false);
   const [reqStatus, setReqStatus] = useState("idle");
   const [fileKey, setFileKey] = useState("");
 
@@ -43,6 +44,7 @@ export const PostForm = () => {
     setAuthor("");
     setContent("");
     setImage("");
+    setImageRemoved(false);
     setFileKey(randomString);
     if (currentPostId) setCurrentPostId("");
   };
@@ -65,9 +67,10 @@ export const PostForm = () => {
       } else {
         //-------------------- EDIT POST
         try {
-          const updatedPost = image
-            ? { title, author, content, image }
-            : { title, author, content };
+          const updatedPost =
+            image || imageRemoved
+              ? { title, author, content, image }
+              : { title, author, content };
 
           setReqStatus("pending");
           await dispatch(updatePost(currentPostId, updatedPost));
@@ -80,6 +83,14 @@ export const PostForm = () => {
         }
       }
     }
+  };
+
+  const handleRemoveImage = () => {
+    const randomString = Math.random().toString(36);
+
+    setImage("");
+    setFileKey(randomString);
+    setImageRemoved(true);
   };
 
   const formWrapperStyle = currentPostId
@@ -127,6 +138,13 @@ export const PostForm = () => {
             onDone={(image) => setImage(image.base64)}
           />
         </div>
+        <button
+          type="button"
+          className="remove-image-button"
+          onClick={handleRemoveImage}
+        >
+          Remove Image
+        </button>
         <input
           type="submit"
           className="button"

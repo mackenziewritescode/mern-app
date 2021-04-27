@@ -9,6 +9,7 @@ import { Reply } from "./Reply/Reply";
 import { ReplyForm } from "../../../Forms/ReplyForm";
 import { PostForm } from "../../../Forms/PostForm";
 import { PostContext } from "../../../../App";
+import { Header } from "../../../Header/Header";
 
 export const ReplyContext = createContext();
 
@@ -75,7 +76,7 @@ export const Replies = ({ match }) => {
         ""
       ) : (
         <div id="replies">
-          <h2>Title</h2>
+          <Header />
           <div id="content">
             {/* Check for edit post form or reply form */}
             {!currentPostId ? (

@@ -6,6 +6,7 @@ import { getPosts } from "../../features/postsActions";
 import { getReplies } from "../../features/repliesActions";
 import { Post } from "./Post/Post";
 import { PostForm } from "../Forms/PostForm";
+import { Header } from "../Header/Header";
 
 export const Posts = () => {
   const dispatch = useDispatch();
@@ -38,7 +39,7 @@ export const Posts = () => {
 
   return (
     <div id="posts">
-      <h2>Dynamic Posts and Replies</h2>
+      <Header />
       <div id="content">
         <PostForm />
         <div id="post-wrapper">{renderedPosts}</div>
