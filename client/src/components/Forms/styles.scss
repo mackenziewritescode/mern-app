@@ -45,14 +45,45 @@
     margin-top: 0;
   }
 
-  .remove-image-button {
-    margin: 0 10px;
-    background-color: rgb(221, 221, 221);
-    border: solid 1px rgb(160, 160, 160);
-    padding: 2px 6px;
-  }
-  .remove-image-button:hover {
-    background-color: rgb(207, 207, 207);
+  .remove-image {
+    .remove-image-button {
+      margin: 0 10px;
+      background-color: rgb(221, 221, 221);
+      border: solid 1px rgb(160, 160, 160);
+      padding: 2px 6px;
+    }
+    .remove-image-button:hover {
+      background-color: rgb(207, 207, 207);
+    }
+
+    .image-removed-text {
+      font-size: 18px;
+      background-color: rgba(0, 0, 0, 0);
+      // background-color: royalblue;
+      border-radius: 8px;
+      padding: 2px 8px;
+      color: rgba(0, 0, 0, 0);
+      // color: white;
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+    .image-removed-text[animation="visible"] {
+      animation: reveal 2s 1;
+    }
+    @keyframes reveal {
+      30% {
+        color: black;
+        background-color: rgb(234, 250, 229);
+      }
+      70% {
+        color: black;
+        background-color: rgb(234, 250, 229);
+      }
+    }
   }
 
   .button {

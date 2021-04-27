@@ -150,10 +150,14 @@ export const PostForm = () => {
           className="button"
           value={currentPostId ? "Update" : "Post"}
         />
+        <button
+          type="button"
+          className="button clear-button"
+          onClick={clearForm}
+        >
+          {currentPostId ? "Cancel" : "Clear"}
+        </button>
       </form>
-      <button className="button clear-button" onClick={clearForm}>
-        {currentPostId ? "Cancel" : "Clear"}
-      </button>
     </div>
   );
 };

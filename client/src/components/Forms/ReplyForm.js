@@ -10,6 +10,8 @@ export const ReplyForm = ({ parentId }) => {
   const [author, setAuthor] = useState("");
   const [content, setContent] = useState("");
   const [image, setImage] = useState("");
+  const [imageRemoved, setImageRemoved] = useState(false);
+  const [animation, setAnimation] = useState("hidden");
   const [reqStatus, setReqStatus] = useState("idle");
   const [fileKey, setFileKey] = useState("");
 
@@ -40,6 +42,7 @@ export const ReplyForm = ({ parentId }) => {
     setAuthor("");
     setContent("");
     setImage("");
+    setImageRemoved(false);
     setFileKey(randomString);
     if (currentReplyId) setCurrentReplyId("");
   };
@@ -67,9 +70,10 @@ export const ReplyForm = ({ parentId }) => {
       } else {
         //-------------------- EDIT REPLY
         try {
-          const updatedReply = image
-            ? { parent: parentId, author, content, image }
-            : { parent: parentId, author, content };
+          const updatedReply =
+            image || imageRemoved
+              ? { parent: parentId, author, content, image }
+              : { parent: parentId, author, content };
 
           setReqStatus("pending");
           await dispatch(updateReply(currentReplyId, updatedReply));
@@ -86,6 +90,15 @@ export const ReplyForm = ({ parentId }) => {
         }
       }
     }
+  };
+
+  const handleRemoveImage = () => {
+    const randomString = Math.random().toString(36);
+
+    setImage("");
+    setFileKey(randomString);
+    setImageRemoved(true);
+    setAnimation("visible");
   };
 
   const formWrapperStyle = currentReplyId
@@ -123,15 +136,32 @@ export const ReplyForm = ({ parentId }) => {
             onDone={(image) => setImage(image.base64)}
           />
         </div>
+        <div className="remove-image">
+          <button
+            type="button"
+            className="remove-image-button"
+            onClick={handleRemoveImage}
+            onAnimationEnd={() => setAnimation("hidden")}
+          >
+            Remove Image
+          </button>
+          <span className="image-removed-text" animation={animation}>
+            Image removed.
+          </span>
+        </div>
         <input
           type="submit"
           className="button"
           value={currentReplyId ? "Update" : "Reply"}
         />
+        <button
+          type="button"
+          className="button clear-button"
+          onClick={clearForm}
+        >
+          {currentReplyId ? "Cancel" : "Clear"}
+        </button>
       </form>
-      <button className="button clear-button" onClick={clearForm}>
-        {currentReplyId ? "Cancel" : "Clear"}
-      </button>
     </div>
   );
 };
