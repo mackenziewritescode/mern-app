@@ -141,11 +141,14 @@ export const ReplyForm = ({ parentId }) => {
             type="button"
             className="remove-image-button"
             onClick={handleRemoveImage}
-            onAnimationEnd={() => setAnimation("hidden")}
           >
             Remove Image
           </button>
-          <span className="image-removed-text" animation={animation}>
+          <span
+            className="image-removed-text"
+            animation={animation}
+            onAnimationEnd={() => setAnimation("hidden")}
+          >
             Image removed.
           </span>
         </div>

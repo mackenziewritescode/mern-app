@@ -12,6 +12,7 @@ export const PostForm = () => {
   const [content, setContent] = useState("");
   const [image, setImage] = useState("");
   const [imageRemoved, setImageRemoved] = useState(false);
+  const [animation, setAnimation] = useState("hidden");
   const [reqStatus, setReqStatus] = useState("idle");
   const [fileKey, setFileKey] = useState("");
 
@@ -91,6 +92,7 @@ export const PostForm = () => {
     setImage("");
     setFileKey(randomString);
     setImageRemoved(true);
+    setAnimation("visible");
   };
 
   const formWrapperStyle = currentPostId
@@ -138,13 +140,22 @@ export const PostForm = () => {
             onDone={(image) => setImage(image.base64)}
           />
         </div>
-        <button
-          type="button"
-          className="remove-image-button"
-          onClick={handleRemoveImage}
-        >
-          Remove Image
-        </button>
+        <div className="remove-image">
+          <button
+            type="button"
+            className="remove-image-button"
+            onClick={handleRemoveImage}
+          >
+            Remove Image
+          </button>
+          <span
+            className="image-removed-text"
+            animation={animation}
+            onAnimationEnd={() => setAnimation("hidden")}
+          >
+            Image removed.
+          </span>
+        </div>
         <input
           type="submit"
           className="button"
