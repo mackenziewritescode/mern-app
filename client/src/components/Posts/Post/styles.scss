@@ -21,6 +21,12 @@
     cursor: pointer;
     color: black;
 
+    -webkit-animation: fadein 1000ms;
+    -moz-animation: fadein 1000ms;
+    -ms-animation: fadein 1000ms;
+    -o-animation: fadein 1000ms;
+    animation: fadein 1000ms;
+
     .post-image-wrap {
       display: flex;
       height: 200px - 30px;

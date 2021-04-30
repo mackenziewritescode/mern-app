@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "./styles.scss";
 
@@ -7,20 +7,37 @@ import { getReplies } from "../../features/repliesActions";
 import { Post } from "./Post/Post";
 import { PostForm } from "../Forms/PostForm";
 import { Header } from "../Header/Header";
+import { Footer } from "../Footer/Footer";
+import { NoPosts } from "./NoPosts/NoPosts";
 
 export const Posts = () => {
+  const [noPosts, setNoPosts] = useState(false);
+  const [fetchStatus, setFetchStatus] = useState("initial");
+
   const dispatch = useDispatch();
-  const posts = useSelector((state) => state.posts);
+  // const posts = useSelector((state) => state.posts);
+  const posts = [];
   const replies = useSelector((state) => state.replies);
 
   const replyCount = (parentId) => {
     return replies.filter((reply) => reply.parent === parentId).length;
   };
 
-  useEffect(() => {
-    dispatch(getPosts());
-    dispatch(getReplies());
+  useEffect(async () => {
+    try {
+      await dispatch(getPosts());
+      await dispatch(getReplies());
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setFetchStatus("complete");
+    }
   }, [dispatch]);
+
+  // if getPosts successfully dispatches but here are no posts, return "no posts" message
+  useEffect(() => {
+    if (fetchStatus === "complete" && posts.length === 0) setNoPosts(true);
+  }, [posts, fetchStatus]);
 
   const renderedPosts = posts
     .map((post) => (
@@ -42,7 +59,8 @@ export const Posts = () => {
       <Header />
       <div id="content">
         <PostForm />
-        <div id="post-wrapper">{renderedPosts}</div>
+        <div id="post-wrapper">{noPosts ? NoPosts : renderedPosts}</div>
+        <Footer />
       </div>
     </div>
   );
