@@ -10,6 +10,7 @@ import { ReplyForm } from "../../../Forms/ReplyForm";
 import { PostForm } from "../../../Forms/PostForm";
 import { PostContext } from "../../../../App";
 import { Header } from "../../../Header/Header";
+import { Footer } from "../../../Footer/Footer";
 
 export const ReplyContext = createContext();
 
@@ -89,6 +90,7 @@ export const Replies = ({ match }) => {
               {renderedReplies}
             </div>
           </div>
+          <Footer />
         </div>
       )}
     </ReplyContext.Provider>

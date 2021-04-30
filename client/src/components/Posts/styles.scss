@@ -5,16 +5,18 @@
   align-items: center;
   min-height: 100vh;
   min-width: 360px;
+  // background: yellow;
 
   #content {
     width: 80%;
+    // background-color: red;
   }
 
   #post-wrapper {
     display: flex;
     flex-direction: column;
     width: calc(100% - 360px);
-    background: rgb(241, 255, 223);
+    // background: rgb(241, 255, 223);
     align-items: center;
     margin-bottom: 30px;
     min-height: 70vh;
@@ -23,6 +25,7 @@
   @media (max-width: 1200px) {
     #post-wrapper {
       width: 100%;
+      min-height: 160px;
     }
   }
   @media (max-width: 500px) {

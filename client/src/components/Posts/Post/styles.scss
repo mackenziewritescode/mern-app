@@ -79,6 +79,7 @@
           display: -webkit-box;
           -webkit-line-clamp: 2;
           -webkit-box-orient: vertical;
+          line-height: 33px;
         }
       }
 
@@ -120,6 +121,23 @@
     }
     .no-image {
       width: 100%;
+    }
+  }
+
+  @keyframes fadein {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  @-moz-keyframes fadein {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
     }
   }
 

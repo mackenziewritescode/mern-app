@@ -1,7 +1,7 @@
 import "./styles.scss";
 
 export const NoPosts = (
-  <footer>
-    <p>There are no posts yet. :(</p>
-  </footer>
+  <div className="no-posts">
+    <p>There are no posts yet.</p>
+  </div>
 );

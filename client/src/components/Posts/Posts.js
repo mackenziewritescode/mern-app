@@ -15,23 +15,25 @@ export const Posts = () => {
   const [fetchStatus, setFetchStatus] = useState("initial");
 
   const dispatch = useDispatch();
-  // const posts = useSelector((state) => state.posts);
-  const posts = [];
+  const posts = useSelector((state) => state.posts);
   const replies = useSelector((state) => state.replies);
 
   const replyCount = (parentId) => {
     return replies.filter((reply) => reply.parent === parentId).length;
   };
 
-  useEffect(async () => {
-    try {
-      await dispatch(getPosts());
-      await dispatch(getReplies());
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setFetchStatus("complete");
-    }
+  useEffect(() => {
+    const getPostsAndReplies = async () => {
+      try {
+        await dispatch(getPosts());
+        await dispatch(getReplies());
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setFetchStatus("complete");
+      }
+    };
+    getPostsAndReplies();
   }, [dispatch]);
 
   // if getPosts successfully dispatches but here are no posts, return "no posts" message
@@ -60,8 +62,8 @@ export const Posts = () => {
       <div id="content">
         <PostForm />
         <div id="post-wrapper">{noPosts ? NoPosts : renderedPosts}</div>
-        <Footer />
       </div>
+      <Footer />
     </div>
   );
 };
