@@ -9,6 +9,7 @@ import { PostForm } from "../Forms/PostForm";
 import { Header } from "../Header/Header";
 import { Footer } from "../Footer/Footer";
 import { NoPosts } from "./NoPosts/NoPosts";
+import { PortfolioLink } from "../PortfolioLink/PortfolioLink";
 
 export const Posts = () => {
   const [noPosts, setNoPosts] = useState(false);
@@ -58,6 +59,7 @@ export const Posts = () => {
 
   return (
     <div id="posts">
+      <PortfolioLink />
       <Header />
       <div id="content">
         <PostForm />

@@ -11,6 +11,7 @@ import { PostForm } from "../../../Forms/PostForm";
 import { PostContext } from "../../../../App";
 import { Header } from "../../../Header/Header";
 import { Footer } from "../../../Footer/Footer";
+import { PortfolioLink } from "../../../PortfolioLink/PortfolioLink";
 
 export const ReplyContext = createContext();
 
@@ -77,6 +78,7 @@ export const Replies = ({ match }) => {
         ""
       ) : (
         <div id="replies">
+          <PortfolioLink />
           <Header />
           <div id="content">
             {/* Check for edit post form or reply form */}

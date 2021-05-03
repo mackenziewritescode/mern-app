@@ -1,10 +1,14 @@
-import "./styles.scss";
+import React from "react";
 import { RiArrowGoBackLine } from "react-icons/ri";
 
-export const PortfolioLink = (
-  <a id="drum-portfolio" href="http://www.sunkenworld.com/#page-3">
-    <p id="drum-portfolio-text">
-      <RiArrowGoBackLine /> Back to portfolio
-    </p>
-  </a>
-);
+import "./styles.scss";
+
+export const PortfolioLink = () => {
+  return (
+    <a id="portfolio-link" href="http://www.sunkenworld.com/#page-3">
+      <p id="portfolio-text">
+        <RiArrowGoBackLine className="arrow" /> Back to portfolio
+      </p>
+    </a>
+  );
+};
