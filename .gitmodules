@@ -1,3 +1,6 @@
 [submodule "restful-forum-server"]
 	path = server
 	url = https://github.com/mackenziewritescode/restful-forum-server.git
+[submodule "restful-forum-client"]
+	path = client
+	url = https://github.com/mackenziewritescode/restful-forum-client.git
