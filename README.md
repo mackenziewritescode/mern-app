@@ -15,7 +15,7 @@ const postUrl = "https://restful-forum.herokuapp.com/posts";
 export const updatePost = (id, updatedPost) =>
   axios.patch(`${postUrl}/${id}`, updatedPost);
 ```
-This is imported as `api.updatePost` in postsActions.js, which contains the Redux actions for Posts. This is where asyncronous requests are made to the API, such as:
+This is imported as `api.updatePost` in postsActions.js, which contains the Redux actions for Posts. This is where asyncronous requests are made to the API and actions are dispatched, such as:
 ```
 export const updatePost = (id, post) => async (dispatch) => {
   try {
