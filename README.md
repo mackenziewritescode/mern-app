@@ -73,4 +73,4 @@ const handleSubmit = async (e) => {
   }
 };
 ```
-This is an async/await function that dispatches the data from the updated post, along with its ID. `updatedPost` 
+This is an async/await function that dispatches the updated post along with its ID. `updatedPost` 
