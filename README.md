@@ -33,4 +33,16 @@ case "UPDATE_POST":
     post._id === action.payload._id ? action.payload : post
   );
 ```
-There the posts...
+We can see here that if the ID of the post that was edited matches the ID of a post in the state, then that post should be replaced with the updated data.
+
+So, how do we edit and update a post on the client-side? First we need to click on the menu drop-down on the post we want to edit, then click "Edit post." Doing this stores the ID of that post to the propery of `currentPostId` with React's `useState` and is stored at the root of the application in App.js and shared with `createContext`. This property is accessed in the PostForm.js component with `useConext.` In PostForm.js, if `currentPostId` exists, it will populate the form fields with the state properties for that post: 
+```
+useEffect(() => {
+  if (currentPostId) {
+    setTitle(existingPost.title);
+    setAuthor(existingPost.author);
+    setContent(existingPost.content);
+  }
+  // eslint-disable-next-line
+}, [currentPostId]);
+```
