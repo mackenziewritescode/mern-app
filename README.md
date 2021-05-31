@@ -73,4 +73,10 @@ const handleSubmit = async (e) => {
   }
 };
 ```
-This is an async/await function that dispatches the updated post along with its ID. `updatedPost` 
+This is an async/await function that dispatches the updated post along with its ID. `updatedPost` is an object that contains all of the data of a post. You can see that depending on if an image exists in the state or if it was removed by pressing the "Remove image" button (which sets `imageRemoved` === true), the object may or may not include an image. The dispatch runs the `updatePost` action described above with the request status state property `reqStatus` set to "pending," and if it is dispatched successfully, the status is set to "idle," the `currentPostId` is removed and the form fields are cleared.
+
+***
+
+That was just a brief look at one aspect of how Redux is used in conjunction with Express and MongoDB to modify data on this web forum. If you're interested in seeing more code, have a look in the `client/src` and `server` folders for lots more.
+
+Thanks for reading! Check out the rest of my work at https://www.sunkenworld.com/.
